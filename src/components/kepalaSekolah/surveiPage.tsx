@@ -6,7 +6,7 @@ import "tailwindcss/tailwind.css";
 import { Router, useRouter } from "next/router";
 import Container from "../container";
 import Heading from "./heading";
-import Card from "./card";
+import Card from "../guru/card";
 import FloatingButton from "../floatingButton";
 
 // Definisikan tipe untuk data Anda
@@ -36,7 +36,7 @@ const SurveiPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (documentNames) {
-        const docRef = doc(db, "kuesionerGuru", documentNamesString);
+        const docRef = doc(db, "kuesionerKepSek", documentNamesString);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -71,7 +71,7 @@ const SurveiPage: React.FC = () => {
 
     try {
       // Cek apakah NPSN sudah terdaftar
-      const docRef = doc(db, "kuesionerGuru", npsnResponden);
+      const docRef = doc(db, "kuesionerKepSek", npsnResponden);
       const docSnap = await getDoc(docRef);
       const data = {
         npsnPeninjau: npsn,
@@ -117,7 +117,7 @@ const SurveiPage: React.FC = () => {
           <div>
             <Card>
               <label htmlFor="npsn" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                NPSN Guru Yang Akan Di Nilai
+                NPSN Kepala Sekolah Yang Akan Di Nilai
               </label>
               <input
                 type="text"
@@ -132,7 +132,7 @@ const SurveiPage: React.FC = () => {
             </Card>
             <Card>
               <label htmlFor="nama" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                Nama Guru Yang Akan Di Nilai
+                Nama Kepala Sekolah Yang Akan Di Nilai
               </label>
               <input
                 type="text"

@@ -13,7 +13,7 @@ export default function ContentGuru() {
 
   useEffect(() => {
     const getDocumentNames = async () => {
-      const kuesionerGuruCollection = collection(db, "kuesionerGuru");
+      const kuesionerGuruCollection = collection(db, "kuesionerKepSek");
       const snapshot = await getDocs(kuesionerGuruCollection);
       const names = snapshot.docs.map((doc) => ({ id: doc.id, nama: doc.data().nama }));
       setDocumentNames(names);
@@ -30,7 +30,7 @@ export default function ContentGuru() {
 
     try {
       // Hapus dokumen dari Firebase
-      const docRef = doc(db, "kuesionerGuru", name);
+      const docRef = doc(db, "kuesionerKepSek", name);
       await deleteDoc(docRef);
 
       // Hapus nama dari state documentNames
@@ -48,12 +48,12 @@ export default function ContentGuru() {
   return (
     <DashboardLayout>
       <h1 className="mb-3 text-lg font-semibold md:text-2xl ">
-        KUESIONER KINERJA GURU <span className="text-sm font-light">SDN Lorem, ipsum dolor.</span>
+        KUESIONER KINERJA KEPALA SEKOLAH <span className="text-sm font-light">SDN Lorem, ipsum dolor.</span>
       </h1>
       <DashboardCard borderColor="border-orange-500">
         <h1 className="ml-2 flex items-center justify-between border-b-[1px] border-b-slate-300 px-2 py-4">
-          Data Kuesioner Guru
-          <Link href={`/kuesionerGuru?npsn=${npsn}`}>
+          Data Kuesioner Kepala Sekolah
+          <Link href={`/kuesionerKepsek?npsn=${npsn}`}>
             <button
               type="button"
               className="mr-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -84,10 +84,10 @@ export default function ContentGuru() {
                   <td className="whitespace-nowrap px-6 py-4 text-xs font-medium text-gray-900 dark:text-white md:text-sm">{nama}</td>
                   <td className="whitespace-nowrap px-6 py-4 text-xs font-medium text-gray-900 dark:text-white md:text-sm">{id}</td>
                   <td className="flex-nowrapp flex items-center justify-end px-6 py-4 text-right">
-                    <Link href={`/lihatDataGuru?npsn=${npsn}&documentNames=${id}`} className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
+                    <Link href={`/lihatDataKepsek?npsn=${npsn}&documentNames=${id}`} className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
                       Lihat
                     </Link>
-                    <Link href={`/kuesionerGuru?npsn=${npsn}&documentNames=${id}`} className="ml-4 text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
+                    <Link href={`/kuesionerKepsek?npsn=${npsn}&documentNames=${id}`} className="ml-4 text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
                       Edit
                     </Link>
                     <button onClick={() => handleDelete(id)} className="ml-4 text-xs font-medium text-red-600 hover:underline dark:text-red-500 md:text-sm">

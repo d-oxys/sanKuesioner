@@ -48,7 +48,15 @@ function Dashboard({ children }: CardProps) {
           {children}
         </main>
       </div>
-      <div className="bottom-0 left-0 flex h-[7vh] w-full bg-white p-8 shadow-lg shadow-slate-300"></div>
+      <div className="bottom-0 left-0 flex h-[7vh] w-full items-center bg-white shadow-lg shadow-slate-300">
+        <p className="ml-4 text-xs font-bold text-black">
+          Developed by{" "}
+          <a className="text-blue-500" href="https://www.linkedin.com/in/michsannr/">
+            Doxys
+          </a>{" "}
+          2023 v1.0 © PKG_SL
+        </p>
+      </div>
     </>
   );
 }
