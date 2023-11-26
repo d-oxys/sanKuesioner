@@ -19,6 +19,7 @@ type UserData = {
   jabatan: string;
   nama: string;
   npsn: string;
+  nipnuptk: string;
   pangkat: string;
   unitKerja: string;
 };
@@ -54,7 +55,7 @@ const DataGuru: React.FC = () => {
         setKuesionerData(data);
 
         // Menggunakan db yang diimpor dari file konfigurasi Firebase Anda
-        const userQuery = query(collection(db, "users"), where("npsn", "==", data.npsnPeninjau));
+        const userQuery = query(collection(db, "users"), where("nipnuptk", "==", data.npsnPeninjau));
         const userQuerySnapshot = await getDocs(userQuery);
         userQuerySnapshot.forEach((doc) => {
           const userData = doc.data() as UserData;
@@ -86,6 +87,11 @@ const DataGuru: React.FC = () => {
                   <td className="">NPSN</td>
                   <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
                   <td className="text-blue-700">{userData.npsn}</td>
+                </tr>
+                <tr>
+                  <td className="">NIP/NUPTK</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.nipnuptk}</td>
                 </tr>
                 <tr>
                   <td className="">Alamat</td>
