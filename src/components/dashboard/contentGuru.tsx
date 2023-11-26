@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function ContentGuru() {
   const router = useRouter();
-  const { npsn } = router.query;
+  const { nipnuptk } = router.query;
   const [documentNames, setDocumentNames] = useState<{ id: string; nama: string }[]>([]);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function ContentGuru() {
       <DashboardCard borderColor="border-orange-500">
         <h1 className="ml-2 flex items-center justify-between border-b-[1px] border-b-slate-300 px-2 py-4">
           Data Kuesioner Guru
-          <Link href={`/kuesionerGuru?npsn=${npsn}`}>
+          <Link href={`/kuesionerGuru?nipnuptk=${nipnuptk}`}>
             <button
               type="button"
               className="mr-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -84,10 +84,10 @@ export default function ContentGuru() {
                   <td className="whitespace-nowrap px-6 py-4 text-xs font-medium text-gray-900 dark:text-white md:text-sm">{nama}</td>
                   <td className="whitespace-nowrap px-6 py-4 text-xs font-medium text-gray-900 dark:text-white md:text-sm">{id}</td>
                   <td className="flex-nowrapp flex items-center justify-end px-6 py-4 text-right">
-                    <Link href={`/lihatDataGuru?npsn=${npsn}&documentNames=${id}`} className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
+                    <Link href={`/lihatDataGuru?nipnuptk=${nipnuptk}&documentNames=${id}`} className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
                       Lihat
                     </Link>
-                    <Link href={`/kuesionerGuru?npsn=${npsn}&documentNames=${id}`} className="ml-4 text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
+                    <Link href={`/kuesionerGuru?nipnuptk=${nipnuptk}&documentNames=${id}`} className="ml-4 text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm">
                       Edit
                     </Link>
                     <button onClick={() => handleDelete(id)} className="ml-4 text-xs font-medium text-red-600 hover:underline dark:text-red-500 md:text-sm">

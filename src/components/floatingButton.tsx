@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 
 const FloatingButton: React.FC = () => {
   const router = useRouter();
-  const { npsn } = router.query;
+  const { nipnuptk } = router.query;
 
   const handleBackToDashboard = () => {
     router.push({
       pathname: "/dashboard",
-      query: { npsn: npsn },
+      query: { nipnuptk: nipnuptk },
     });
   };
 

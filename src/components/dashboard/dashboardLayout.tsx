@@ -30,7 +30,7 @@ function Dashboard({ children }: CardProps) {
             ></path>
           </svg>
         </button>
-        <h2 className="bold text-end text-2xl text-white">PKG</h2>
+        <h2 className="bold text-end text-2xl text-white">PKGP</h2>
       </div>
       <div className="flex min-h-screen bg-gray-200 dark:bg-gray-800">
         <aside id="default-sidebar" className={`absolute left-0 z-40 h-screen w-64 transition-transform md:sticky ${isSidebarOpen ? "translate-x-0" : " -translate-x-full"} sm:translate-x-0`} aria-label="Sidebar">

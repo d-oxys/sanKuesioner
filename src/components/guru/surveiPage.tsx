@@ -16,7 +16,7 @@ type PertanyaanData = {
 
 const SurveiPage: React.FC = () => {
   const router = useRouter();
-  const { npsn, documentNames } = router.query;
+  const { nipnuptk, documentNames } = router.query;
   let documentNamesString = "";
   const [npsnPeninjau, setNpsnPeninjau] = useState("");
   const [npsnResponden, setNpsnResponden] = useState("");
@@ -74,7 +74,7 @@ const SurveiPage: React.FC = () => {
       const docRef = doc(db, "kuesionerGuru", npsnResponden);
       const docSnap = await getDoc(docRef);
       const data = {
-        npsnPeninjau: npsn,
+        npsnPeninjau: nipnuptk,
         npsnResponden: npsnResponden,
         nama: nama,
         asalSekolah: asalSekolah,
@@ -83,7 +83,7 @@ const SurveiPage: React.FC = () => {
 
       if (documentNames) {
         await updateDoc(docRef, data);
-        console.log("Document updated:", npsn);
+        console.log("Document updated:", nipnuptk);
         alert("Kuesioner Berhasil DiUpdate");
       } else {
         if (docSnap.exists()) {
@@ -96,7 +96,7 @@ const SurveiPage: React.FC = () => {
 
       router.push({
         pathname: "/dashboard",
-        query: { npsn: npsn },
+        query: { nipnuptk: nipnuptk },
       });
 
       // Redirect ke halaman dashboard
