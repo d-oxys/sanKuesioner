@@ -1,11 +1,13 @@
-"use client";
-import SurveiPage from "../components/guru/surveiPage";
-import "tailwindcss/tailwind.css";
+'use client';
+import SurveiPage from '../components/guru/surveiPage';
+import Pagination from '../components/guru/pagination';
+import data from '../API/guru.json';
+import 'tailwindcss/tailwind.css';
 
 export default function guruPage() {
   return (
     <>
-      <SurveiPage />
+      <Pagination data={data} />
     </>
   );
 }

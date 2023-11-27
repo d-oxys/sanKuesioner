@@ -1,11 +1,12 @@
-"use client";
-import SurveiPage from "../components/kepalaSekolah/surveiPage";
-import "tailwindcss/tailwind.css";
+'use client';
+import Pagination from '../components/kepalaSekolah/pagination';
+import 'tailwindcss/tailwind.css';
+import data from '../API/guru.json';
 
 export default function kepsekPage() {
   return (
     <>
-      <SurveiPage />
+      <Pagination data={data} />
     </>
   );
 }

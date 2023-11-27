@@ -1,6 +1,29 @@
-{
-  "pertanyaan1": "1. Bertanya kepada peserta didik hal apa yang sudah baik dari praktik mengajar.",
-  "pertanyaan2": "2. Bertanya kepada peserta didik hal apa yang belum dimengerti dari kegiatan pembelajaran yang dilakukan.",
-  "pertanyaan3": "3. Meminta rekan sesama guru untuk melihat kegiatan pembelajarannya.",
-  "pertanyaan4": "4. Meminta rekan sesama guru untuk memberikan masukan setelah melihat kegiatan pembelajaran yang dilakukan. "
-}
+[
+  {
+    "kategori": "KATEGORI: PENGEMBANGAN DIRI DAN ORANG LAIN",
+    "penjelasan": "Menunjukkan praktik pengembangan diri berdasarkan kesadaran dan kemauan pribadi",
+    "pertanyaan1": "1. Bertanya kepada peserta didik hal apa yang sudah baik dari praktik mengajar.",
+    "pertanyaan2": "2. Bertanya kepada peserta didik hal apa yang sudah baik dari praktik mengajar.",
+    "pertanyaan": "2. Bertanya kepada peserta didik hal apa yang sudah baik dari praktik mengajar."
+  },
+
+  {
+    "kategori": "KATEGORI: KEPEMIMPINAN  PEMBELAJARAN",
+    "penjelasan": "Memimpin upaya pengembangan lingkungan belajar yang berpusat pada peserta didik",
+    "pertanyaan1": "3. Bertanya kepada peserta didik hal apa yang belum dimengerti dari kegiatan pembelajaran yang dilakukan.",
+    "pertanyaan2": "4. Bertanya kepada peserta didik hal apa yang belum dimengerti dari kegiatan pembelajaran yang dilakukan."
+  },
+  {
+    "kategori": "KATEGORI: KEPEMIMPINAN MANAJEMEN SEKOLAH",
+    "penjelasan": "Mengembangkan dan mewujudkan visi sekolah yang berorientasi pada peserta didik",
+    "pertanyaan1": "5. Meminta rekan sesama guru untuk melihat kegiatan pembelajarannya.",
+    "pertanyaan2": "6. Meminta rekan sesama guru untuk melihat kegiatan pembelajarannya.",
+    "pertanyaan3": "7. Meminta rekan sesama guru untuk melihat kegiatan pembelajarannya."
+  },
+  {
+    "kategori": "KATEGORI: KEPEMIMPINAN PENGEMBANGAN SEKOLAH",
+    "penjelasan": "Memimpin program pengembangan sekolah untuk mengoptimalkan proses belajar peserta didik dan mendukung kebutuhan masyarakat sekitar sekolah yang relevan",
+    "pertanyaan1": "8. Meminta rekan sesama guru untuk memberikan masukan setelah melihat kegiatan pembelajaran yang dilakukan.",
+    "pertanyaan2": "9. Meminta rekan sesama guru untuk memberikan masukan setelah melihat kegiatan pembelajaran yang dilakukan."
+  }
+]

@@ -1,6 +1,6 @@
-"use client";
-import DataGuru from "../components/kepalaSekolah/dataKepSek";
-import "tailwindcss/tailwind.css";
+'use client';
+import DataGuru from '../components/kepalaSekolah/dataKepsek';
+import 'tailwindcss/tailwind.css';
 
 export default function guruPage() {
   return (
