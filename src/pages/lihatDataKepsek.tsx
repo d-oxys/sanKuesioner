@@ -1,11 +1,11 @@
 'use client';
-import DataGuru from '../components/kepalaSekolah/dataKepsek';
+import DataKepsek from '../components/kepalaSekolah/dataKepsek';
 import 'tailwindcss/tailwind.css';
 
 export default function guruPage() {
   return (
     <div>
-      <DataGuru />
+      <DataKepsek />
     </div>
   );
 }
