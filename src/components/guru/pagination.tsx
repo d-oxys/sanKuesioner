@@ -150,7 +150,7 @@ export default function Pagination({ data }: { data: Data[] }) {
       <Container>
         <FloatingButton />
         <Heading />
-        <form className='md:w-[65%]' onSubmit={handleSubmit}>
+        <form className='w-full md:w-[65%]' onSubmit={handleSubmit}>
           {currentPage === 0 && (
             <Biodata
               npsnResponden={npsnResponden}
