@@ -44,7 +44,7 @@ type KuesionerData = {
   jawaban: JawabanData;
 };
 
-const DataGuru: React.FC = () => {
+const DataKepsek: React.FC = () => {
   const router = useRouter();
   const { documentNames } = router.query;
   let documentNamesString = '';
@@ -245,4 +245,4 @@ const DataGuru: React.FC = () => {
   );
 };
 
-export default DataGuru;
+export default DataKepsek;
