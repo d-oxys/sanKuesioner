@@ -53,8 +53,11 @@ function Dashboard({ children }: CardProps) {
           Developed by{" "}
           <a className="text-blue-500" href="https://www.linkedin.com/in/michsannr/">
             Doxys
+          </a>{" & "}
+          <a className="text-blue-500" href="https://www.linkedin.com/in/ilhamabdulmugni/">
+            Hoxy
           </a>{" "}
-          2023 v1.0 © PKG_SL
+          2023 v1.0 © PKGP_SL
         </p>
       </div>
     </>

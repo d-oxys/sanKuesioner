@@ -48,17 +48,17 @@ export default function ContentGuru() {
   return (
     <DashboardLayout>
       <h1 className="mb-3 text-lg font-semibold md:text-2xl ">
-        KUESIONER KINERJA KEPALA SEKOLAH <span className="text-sm font-light">SDN Lorem, ipsum dolor.</span>
+        KUESIONER KINERJA GURU PENGGERAK <span className="text-sm font-light"></span>
       </h1>
       <DashboardCard borderColor="border-orange-500">
         <h1 className="ml-2 flex items-center justify-between border-b-[1px] border-b-slate-300 px-2 py-4">
-          Data Kuesioner Kepala Sekolah
+          Data Kuesioner Guru Penggerak Yang Sudah Di Nilai
           <Link href={`/kuesionerKepsek?npsn=${npsn}`}>
             <button
               type="button"
               className="mr-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              tambah
+              Tambah
             </button>
           </Link>
         </h1>
@@ -71,7 +71,7 @@ export default function ContentGuru() {
                   Nama
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  NPSN
+                  NIP / NUPTK
                 </th>
                 <th scope="col" className="px-6 py-3">
                   <span className="sr-only">Edit</span>
