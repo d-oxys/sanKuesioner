@@ -44,7 +44,7 @@ type KuesionerData = {
   jawaban: JawabanData;
 };
 
-const DataGuru: React.FC = () => {
+const DataKepsek: React.FC = () => {
   const router = useRouter();
   const { documentNames } = router.query;
   let documentNamesString = '';
@@ -60,7 +60,7 @@ const DataGuru: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       // Menggunakan db yang diimpor dari file konfigurasi Firebase Anda
-      const kuesionerQuery = query(collection(db, 'kuesionerGuru'), where('npsnResponden', '==', documentNamesString));
+      const kuesionerQuery = query(collection(db, 'kuesionerKepSek'), where('npsnResponden', '==', documentNamesString));
       const kuesionerQuerySnapshot = await getDocs(kuesionerQuery);
       kuesionerQuerySnapshot.forEach(async (doc) => {
         const data = doc.data() as KuesionerData;
@@ -245,4 +245,4 @@ const DataGuru: React.FC = () => {
   );
 };
 
-export default DataGuru;
+export default DataKepsek;
