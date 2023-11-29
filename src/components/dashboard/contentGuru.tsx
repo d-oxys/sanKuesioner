@@ -90,7 +90,9 @@ export default function ContentGuru() {
                     <Link href={`/kuesionerGuru?nipnuptk=${nipnuptk}&documentNames=${id}`} className='ml-4 text-xs font-medium text-blue-600 hover:underline dark:text-blue-500 md:text-sm'>
                       Edit
                     </Link>
-                    <button onClick={() => handleDelete(id)} className='ml-4 text-xs font-medium text-red-600 hover:underline dark:text-red-500 md:text-sm'></button>
+                    <button onClick={() => handleDelete(id)} className='ml-4 text-xs font-medium text-red-600 hover:underline dark:text-red-500 md:text-sm'>
+                      Hapus
+                    </button>
                   </td>
                 </tr>
               ))}
