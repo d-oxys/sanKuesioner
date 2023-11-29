@@ -6,7 +6,7 @@ function Heading() {
   return (
     <>
       <div className='mb-1 mt-5 w-[65%] rounded-lg border border-gray-200 bg-white object-fill p-6 shadow'>
-        <h5 className='mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white'>KUESIONER KINERJA GURU ONLINE</h5>
+        <h5 className='mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white'>KUESIONER KINERJA GURU PENGGERAK</h5>
         <p className='mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-white'>PETUNJUK PENGISIAN : </p>
         <div className='mx-4 my-4 hidden text-xs font-semibold md:block md:text-sm md:last:font-medium'>
           <table className='table-auto border-collapse border border-black '>

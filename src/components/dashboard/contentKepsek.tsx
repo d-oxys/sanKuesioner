@@ -48,11 +48,11 @@ export default function ContentGuru() {
   return (
     <DashboardLayout>
       <h1 className='mb-3 text-lg font-semibold md:text-2xl '>
-         KUESIONER KINERJA GURU PENGGERAK <span className='text-sm font-light'>SDN Lorem, ipsum dolor.</span>
+         KUESIONER KINERJA GURU PENGGERAK <span className='text-sm font-light'> (Kepala Sekolah)</span>
       </h1>
       <DashboardCard borderColor='border-orange-500'>
         <h1 className='ml-2 flex items-center justify-between border-b-[1px] border-b-slate-300 px-2 py-4'>
-          Data Kuesioner Guru
+          Data Kuesioner Kinerja Guru Penggerak
           <Link href={`/kuesionerKepsek?nipnuptk=${nipnuptk}`}>
             <button
               type='button'

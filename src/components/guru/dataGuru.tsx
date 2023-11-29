@@ -85,7 +85,7 @@ const DataGuru: React.FC = () => {
         <FloatingButton />
         <div className='my-5 overflow-auto rounded-sm bg-white md:w-[65%]'>
           <h1 className='py-4 text-center text-lg font-semibold md:text-2xl'>
-            SURAT PERNYATAAN SUPERVISI <span className='block'>PENGAWAS SD TENTANG BELAJAR MENGAJAR</span>
+            HASIL PENILAIAN KUESIONER <span className='block'>KINERJA GURU PENGGERAK</span>
           </h1>
           <div className='mx-2 p-2 text-xs font-semibold md:text-base md:last:font-medium'>
             {userData && (
@@ -96,7 +96,7 @@ const DataGuru: React.FC = () => {
                   <td className='text-blue-700'>{userData.nama}</td>
                 </tr>
                 <tr>
-                  <td className=''>NIP / NUPTK</td>
+                  <td className=''>NPSN</td>
                   <td className=' pl-8 pr-2 md:pl-[11.5rem] md:pr-2'>:</td>
                   <td className='text-blue-700'>{userData.npsn}</td>
                 </tr>
@@ -129,6 +129,7 @@ const DataGuru: React.FC = () => {
               </table>
             )}
           </div>
+
           <div className=' mx-4 text-xs font-semibold md:text-base md:last:font-medium'>Menyatakan bahwa</div>
           <div className='mx-2 mb-3 p-2 text-xs font-semibold md:text-base md:last:font-medium'>
             {kuesionerData && (
@@ -181,7 +182,7 @@ const DataGuru: React.FC = () => {
               </table>
             )}
           </div>
-          <div className=' mx-4 text-xs font-semibold md:text-base md:last:font-medium'>Telah melaksanakan kegiatan proses belajar mengajar pada tahun pelajaran saat ini</div>
+          <div className=' mx-4 text-xs font-semibold md:text-base md:last:font-medium'>Telah melaksanakan kegiatan program guru penggerak</div>
           <div className='mx-4 my-4 text-xs font-semibold md:text-base md:last:font-medium'>
             {kuesionerData && (
               <table className='table-auto border-collapse border border-black'>
@@ -209,7 +210,7 @@ const DataGuru: React.FC = () => {
 
                 <tfoot>
                   <tr>
-                    <td className='border border-black p-2 text-center'>Jumlah (Hasil Penilaian Kinerja Guru)</td>
+                    <td className='border border-black p-2 text-center'>Jumlah (Hasil Penilaian Kinerja Guru Penggerak)</td>
                     <td className='border border-black p-2 px-4 text-center text-blue-700'>{Object.values(kuesionerData.jawaban).reduce((a, b) => a + Number(b), 0)}</td>
                   </tr>
                   <tr>
