@@ -47,7 +47,7 @@ const Biodata: React.FC<BiodataProps> = ({
     <div>
       <Card>
         <label htmlFor='npsn' className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'>
-          NIP / NUPTK
+          NPSN 
         </label>
         <input
           type='text'
@@ -96,6 +96,7 @@ const Biodata: React.FC<BiodataProps> = ({
           type='text'
           name='tempatTanggalLahir'
           className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+          placeholder='Tempat Tanggal Lahir'
           id='tempatTanggalLahir'
           required={true}
           value={tempatTanggalLahir}
@@ -109,6 +110,7 @@ const Biodata: React.FC<BiodataProps> = ({
           type='text'
           name='jenisKelamin'
           className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+          placeholder='Jenis Kelamin'
           id='jenisKelamin'
           required={true}
           value={jenisKelamin}
@@ -117,11 +119,12 @@ const Biodata: React.FC<BiodataProps> = ({
       </Card>
 
       <Card>
-        <label htmlFor='pangkat'>Pangkat</label>
+        <label htmlFor='pangkat'>Pangkat/Gol</label>
         <input
           type='text'
           name='pangkat'
           className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+          placeholder='Pangkat/Gol'
           id='pangkat'
           required={true}
           value={pangkat}
@@ -130,11 +133,12 @@ const Biodata: React.FC<BiodataProps> = ({
       </Card>
 
       <Card>
-        <label htmlFor='TMT'>TMT</label>
+        <label htmlFor='TMT'>TMT Sebagai Guru Penggerak</label>
         <input
           type='text'
           name='TMT'
           className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+          placeholder='TMT Sebagai Guru Penggerak'
           id='TMT'
           required={true}
           value={TMT}
@@ -143,11 +147,12 @@ const Biodata: React.FC<BiodataProps> = ({
       </Card>
 
       <Card>
-        <label htmlFor='masaKerja'>Masa Kerja</label>
+        <label htmlFor='masaKerja'>Masa Kerja Jadi Guru</label>
         <input
           type='text'
           name='masaKerja'
           className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+          placeholder='Masa Kerja Jadi Guru'
           id='masaKerja'
           required={true}
           value={masaKerja}
@@ -161,6 +166,7 @@ const Biodata: React.FC<BiodataProps> = ({
           type='text'
           name='pendidikanTerakhir'
           className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+          placeholder='Pendidikan Terakhir'
           id='pendidikanTerakhir'
           required={true}
           value={pendidikanTerakhir}
