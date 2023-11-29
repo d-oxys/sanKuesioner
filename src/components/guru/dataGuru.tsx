@@ -1,4 +1,5 @@
 // pages/index.js atau halaman yang sesuai
+<<<<<<< HEAD
 import React, { useState, FormEvent, useEffect } from 'react';
 import { auth, db } from '../../API/firebase';
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
@@ -16,6 +17,19 @@ type PertanyaanData = {
 const pertanyaanData: PertanyaanData = [
   // Your data here
 ];
+=======
+import React, { useState, FormEvent, useEffect } from "react";
+import { auth, db } from "../../API/firebase";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import "tailwindcss/tailwind.css";
+import { Router, useRouter } from "next/router";
+import Container from "../container";
+import FloatingButton from "../floatingButton";
+
+type PertanyaanData = {
+  [key: string]: string;
+};
+>>>>>>> e01b401 (first commit)
 type JawabanData = {
   [key: string]: string;
 };
@@ -25,7 +39,10 @@ type UserData = {
   jabatan: string;
   nama: string;
   npsn: string;
+<<<<<<< HEAD
   nipnuptk: string;
+=======
+>>>>>>> e01b401 (first commit)
   pangkat: string;
   unitKerja: string;
 };
@@ -35,24 +52,36 @@ type KuesionerData = {
   nama: string;
   npsnPeninjau: string;
   npsnResponden: string;
+<<<<<<< HEAD
   tempatTanggalLahir: string;
   jenisKelamin: string;
   pangkat: string;
   TMT: string;
   masaKerja: string;
   pendidikanTerakhir: string;
+=======
+>>>>>>> e01b401 (first commit)
   jawaban: JawabanData;
 };
 
 const DataGuru: React.FC = () => {
   const router = useRouter();
   const { documentNames } = router.query;
+<<<<<<< HEAD
   let documentNamesString = '';
   const [userData, setUserData] = useState<UserData | null>(null);
   const [kuesionerData, setKuesionerData] = useState<KuesionerData | null>(null);
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
 
   if (typeof documentNames === 'string') {
+=======
+  let documentNamesString = "";
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [kuesionerData, setKuesionerData] = useState<KuesionerData | null>(null);
+  const pertanyaanData = require("../../API/guru.json") as PertanyaanData;
+
+  if (typeof documentNames === "string") {
+>>>>>>> e01b401 (first commit)
     documentNamesString = documentNames;
   } else if (Array.isArray(documentNames)) {
     documentNamesString = documentNames[0];
@@ -60,14 +89,22 @@ const DataGuru: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       // Menggunakan db yang diimpor dari file konfigurasi Firebase Anda
+<<<<<<< HEAD
       const kuesionerQuery = query(collection(db, 'kuesionerGuru'), where('npsnResponden', '==', documentNamesString));
+=======
+      const kuesionerQuery = query(collection(db, "kuesionerGuru"), where("npsnResponden", "==", documentNamesString));
+>>>>>>> e01b401 (first commit)
       const kuesionerQuerySnapshot = await getDocs(kuesionerQuery);
       kuesionerQuerySnapshot.forEach(async (doc) => {
         const data = doc.data() as KuesionerData;
         setKuesionerData(data);
 
         // Menggunakan db yang diimpor dari file konfigurasi Firebase Anda
+<<<<<<< HEAD
         const userQuery = query(collection(db, 'users'), where('nipnuptk', '==', data.npsnPeninjau));
+=======
+        const userQuery = query(collection(db, "users"), where("npsn", "==", data.npsnPeninjau));
+>>>>>>> e01b401 (first commit)
         const userQuerySnapshot = await getDocs(userQuery);
         userQuerySnapshot.forEach((doc) => {
           const userData = doc.data() as UserData;
@@ -83,9 +120,10 @@ const DataGuru: React.FC = () => {
     <>
       <Container>
         <FloatingButton />
+<<<<<<< HEAD
         <div className='my-5 overflow-auto rounded-sm bg-white md:w-[65%]'>
           <h1 className='py-4 text-center text-lg font-semibold md:text-2xl'>
-            SURAT PERNYATAAN SUPERVISI <span className='block'>PENGAWAS SD TENTANG BELAJAR MENGAJAR</span>
+            HASIL PENILAIAN KUESIONER <span className='block'>KINERJA GURU PENGGERAK</span>
           </h1>
           <div className='mx-2 p-2 text-xs font-semibold md:text-base md:last:font-medium'>
             {userData && (
@@ -96,7 +134,7 @@ const DataGuru: React.FC = () => {
                   <td className='text-blue-700'>{userData.nama}</td>
                 </tr>
                 <tr>
-                  <td className=''>NIP / NUPTK</td>
+                  <td className=''>NPSN</td>
                   <td className=' pl-8 pr-2 md:pl-[11.5rem] md:pr-2'>:</td>
                   <td className='text-blue-700'>{userData.npsn}</td>
                 </tr>
@@ -125,10 +163,50 @@ const DataGuru: React.FC = () => {
                   <td className=''>Unit Kerja</td>
                   <td className=' pl-8 pr-2 md:pl-[11.5rem] md:pr-2'>:</td>
                   <td className='text-blue-700'>{userData.unitKerja}</td>
+=======
+        <div className="my-5 overflow-auto rounded-sm bg-white md:w-[70%]">
+          <h1 className="py-4 text-center text-lg font-semibold md:text-2xl">
+            SURAT PERNYATAAN SUPERVISI <span className="block">PENGAWAS SD TENTANG BELAJAR MENGAJAR</span>
+          </h1>
+          <div className="mx-2 p-2 text-xs font-semibold md:text-base md:last:font-medium">
+            {userData && (
+              <table className="table-auto">
+                <tr>
+                  <td className="">Nama</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.nama}</td>
+                </tr>
+                <tr>
+                  <td className="">NPSN</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.npsn}</td>
+                </tr>
+                <tr>
+                  <td className="">Alamat</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.alamat}</td>
+                </tr>
+                <tr>
+                  <td className="">Jabatan</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.jabatan}</td>
+                </tr>
+
+                <tr>
+                  <td className="">Pangkat</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.pangkat}</td>
+                </tr>
+                <tr>
+                  <td className="">Unit Kerja</td>
+                  <td className=" pl-8 pr-2 md:pl-32 md:pr-2">:</td>
+                  <td className="text-blue-700">{userData.unitKerja}</td>
+>>>>>>> e01b401 (first commit)
                 </tr>
               </table>
             )}
           </div>
+<<<<<<< HEAD
           <div className=' mx-4 text-xs font-semibold md:text-base md:last:font-medium'>Menyatakan bahwa</div>
           <div className='mx-2 mb-3 p-2 text-xs font-semibold md:text-base md:last:font-medium'>
             {kuesionerData && (
@@ -177,11 +255,32 @@ const DataGuru: React.FC = () => {
                   <td className=''>Pendidikan Terakhir</td>
                   <td className=' pl-8 pr-2 md:pl-28 md:pr-2'>:</td>
                   <td className='text-blue-700'>{kuesionerData.pendidikanTerakhir}</td>
+=======
+          <div className=" mx-4 text-xs font-semibold md:text-base md:last:font-medium">Menyatakan bahwa</div>
+          <div className="mx-2 mb-3 p-2 text-xs font-semibold md:text-base md:last:font-medium">
+            {kuesionerData && (
+              <table className="table-auto">
+                <tr>
+                  <td className="">Nama</td>
+                  <td className=" pl-8 pr-2 md:pl-28 md:pr-2">:</td>
+                  <td className="text-blue-700">{kuesionerData.nama}</td>
+                </tr>
+                <tr>
+                  <td className="">NPSN</td>
+                  <td className=" pl-8 pr-2 md:pl-28 md:pr-2">:</td>
+                  <td className="text-blue-700">{kuesionerData.npsnResponden}</td>
+                </tr>
+                <tr>
+                  <td className="">Asal Sekolah</td>
+                  <td className=" pl-8 pr-2 md:pl-28 md:pr-2">:</td>
+                  <td className="text-blue-700">{kuesionerData.asalSekolah}</td>
+>>>>>>> e01b401 (first commit)
                 </tr>
               </table>
             )}
           </div>
-          <div className=' mx-4 text-xs font-semibold md:text-base md:last:font-medium'>Telah melaksanakan kegiatan proses belajar mengajar pada tahun pelajaran saat ini</div>
+<<<<<<< HEAD
+          <div className=' mx-4 text-xs font-semibold md:text-base md:last:font-medium'>Telah melaksanakan kegiatan program guru penggerak</div>
           <div className='mx-4 my-4 text-xs font-semibold md:text-base md:last:font-medium'>
             {kuesionerData && (
               <table className='table-auto border-collapse border border-black'>
@@ -209,7 +308,7 @@ const DataGuru: React.FC = () => {
 
                 <tfoot>
                   <tr>
-                    <td className='border border-black p-2 text-center'>Jumlah (Hasil Penilaian Kinerja Guru)</td>
+                    <td className='border border-black p-2 text-center'>Jumlah (Hasil Penilaian Kinerja Guru Penggerak)</td>
                     <td className='border border-black p-2 px-4 text-center text-blue-700'>{Object.values(kuesionerData.jawaban).reduce((a, b) => a + Number(b), 0)}</td>
                   </tr>
                   <tr>
@@ -234,6 +333,30 @@ const DataGuru: React.FC = () => {
 
                       return <td className={`border border-black p-2 px-4 text-center ${color}`}>{label}</td>;
                     })()}
+=======
+          <div className=" mx-4 text-xs font-semibold md:text-base md:last:font-medium">Telah melaksanakan kegiatan proses belajar mengajar pada tahun pelajaran saat ini</div>
+          <div className="mx-4 my-4 text-xs font-semibold md:text-base md:last:font-medium">
+            {kuesionerData && (
+              <table className="table-auto border-collapse border border-black">
+                <thead>
+                  <tr>
+                    <td className="border border-black p-2 text-center">Kompetensi</td>
+                    <td className="border border-black p-2 px-4 text-center text-blue-700">Nilai</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(pertanyaanData).map((key) => (
+                    <tr key={key}>
+                      <td className="border border-black p-2">{pertanyaanData[key]}</td>
+                      <td className="border border-black p-2 px-4 text-center text-blue-700">{kuesionerData.jawaban[key]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td className="border border-black p-2 text-center">Jumlah (Hasil Penilaian Kinerja Guru)</td>
+                    <td className="border border-black p-2 px-4 text-center text-blue-700">{Object.values(kuesionerData.jawaban).reduce((a, b) => a + Number(b), 0)}</td>
+>>>>>>> e01b401 (first commit)
                   </tr>
                 </tfoot>
               </table>

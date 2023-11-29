@@ -30,7 +30,11 @@ function Dashboard({ children }: CardProps) {
             ></path>
           </svg>
         </button>
+<<<<<<< HEAD
         <h2 className="bold text-end text-2xl text-white">PKGP</h2>
+=======
+        <h2 className="bold text-end text-2xl text-white">PKG</h2>
+>>>>>>> e01b401 (first commit)
       </div>
       <div className="flex min-h-screen bg-gray-200 dark:bg-gray-800">
         <aside id="default-sidebar" className={`absolute left-0 z-40 h-screen w-64 transition-transform md:sticky ${isSidebarOpen ? "translate-x-0" : " -translate-x-full"} sm:translate-x-0`} aria-label="Sidebar">
@@ -48,6 +52,7 @@ function Dashboard({ children }: CardProps) {
           {children}
         </main>
       </div>
+<<<<<<< HEAD
       <div className="bottom-0 left-0 flex h-[7vh] w-full items-center bg-white shadow-lg shadow-slate-300">
         <p className="ml-4 text-xs font-bold text-black">
           Developed by{" "}
@@ -60,6 +65,9 @@ function Dashboard({ children }: CardProps) {
           2023 v1.0 © PKGP_SL
         </p>
       </div>
+=======
+      <div className="bottom-0 left-0 flex h-[7vh] w-full bg-white p-8 shadow-lg shadow-slate-300"></div>
+>>>>>>> e01b401 (first commit)
     </>
   );
 }

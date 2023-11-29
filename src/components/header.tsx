@@ -14,7 +14,11 @@ function Header() {
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
           <a href="https://flowbite.com/" className="flex items-center">
             <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-8" alt="Flowbite Logo" />
+<<<<<<< HEAD
             <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">PKGP</span>
+=======
+            <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">PKG</span>
+>>>>>>> e01b401 (first commit)
           </a>
           <button
             onClick={toggleNavbar}
@@ -37,18 +41,32 @@ function Header() {
               </li>
               <li>
                 <Link
+<<<<<<< HEAD
                   href="../login"
                   className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
                 >
                   Login
+=======
+                  href="/guruPage"
+                  className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+                >
+                  Kuisoner Guru
+>>>>>>> e01b401 (first commit)
                 </Link>
               </li>
               <li>
                 <a
+<<<<<<< HEAD
                   href="../SignUp"
                   className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
                 >
                   Daftar
+=======
+                  href="#"
+                  className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+                >
+                  Kuisoner Kepala sekolah
+>>>>>>> e01b401 (first commit)
                 </a>
               </li>
             </ul>

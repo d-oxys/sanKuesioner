@@ -7,7 +7,10 @@ import { Router, useRouter } from "next/router";
 import Container from "../container";
 import Heading from "./heading";
 import Card from "./card";
+<<<<<<< HEAD
 import FloatingButton from "../floatingButton";
+=======
+>>>>>>> e01b401 (first commit)
 
 // Definisikan tipe untuk data Anda
 type PertanyaanData = {
@@ -16,7 +19,11 @@ type PertanyaanData = {
 
 const SurveiPage: React.FC = () => {
   const router = useRouter();
+<<<<<<< HEAD
   const { nipnuptk, documentNames } = router.query;
+=======
+  const { npsn, documentNames } = router.query;
+>>>>>>> e01b401 (first commit)
   let documentNamesString = "";
   const [npsnPeninjau, setNpsnPeninjau] = useState("");
   const [npsnResponden, setNpsnResponden] = useState("");
@@ -25,7 +32,10 @@ const SurveiPage: React.FC = () => {
   const [jawaban, setJawaban] = useState<Record<string, string>>({});
   // Cast data Anda ke tipe yang baru dibuat
   const pertanyaanData = require("../../API/guru.json") as PertanyaanData;
+<<<<<<< HEAD
   const [prevNpsnResponden, setPrevNpsnResponden] = useState(npsnResponden);
+=======
+>>>>>>> e01b401 (first commit)
 
   if (typeof documentNames === "string") {
     documentNamesString = documentNames;
@@ -46,7 +56,10 @@ const SurveiPage: React.FC = () => {
           setNama(data.nama);
           setAsalSekolah(data.asalSekolah);
           setJawaban(data.jawaban);
+<<<<<<< HEAD
           setPrevNpsnResponden(data.npsnResponden);
+=======
+>>>>>>> e01b401 (first commit)
         }
       }
     };
@@ -63,18 +76,25 @@ const SurveiPage: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (documentNames && prevNpsnResponden !== npsnResponden) {
       alert("Perhatian, NPSN tidak dapat diubah. Jika Anda ingin mengubah NPSN, silakan hapus entri saat ini dan buat entri baru. Terima kasih atas pengertian Anda.");
       setNpsnResponden(prevNpsnResponden);
       return;
     }
+=======
+>>>>>>> e01b401 (first commit)
 
     try {
       // Cek apakah NPSN sudah terdaftar
       const docRef = doc(db, "kuesionerGuru", npsnResponden);
       const docSnap = await getDoc(docRef);
       const data = {
+<<<<<<< HEAD
         npsnPeninjau: nipnuptk,
+=======
+        npsnPeninjau: npsn,
+>>>>>>> e01b401 (first commit)
         npsnResponden: npsnResponden,
         nama: nama,
         asalSekolah: asalSekolah,
@@ -83,7 +103,11 @@ const SurveiPage: React.FC = () => {
 
       if (documentNames) {
         await updateDoc(docRef, data);
+<<<<<<< HEAD
         console.log("Document updated:", nipnuptk);
+=======
+        console.log("Document updated:", npsn);
+>>>>>>> e01b401 (first commit)
         alert("Kuesioner Berhasil DiUpdate");
       } else {
         if (docSnap.exists()) {
@@ -96,7 +120,11 @@ const SurveiPage: React.FC = () => {
 
       router.push({
         pathname: "/dashboard",
+<<<<<<< HEAD
         query: { nipnuptk: nipnuptk },
+=======
+        query: { npsn: npsn },
+>>>>>>> e01b401 (first commit)
       });
 
       // Redirect ke halaman dashboard
@@ -111,13 +139,20 @@ const SurveiPage: React.FC = () => {
   return (
     <>
       <Container>
+<<<<<<< HEAD
         <FloatingButton />
+=======
+>>>>>>> e01b401 (first commit)
         <Heading />
         <form className="md:w-[58%]" onSubmit={handleSubmit}>
           <div>
             <Card>
               <label htmlFor="npsn" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+<<<<<<< HEAD
                 NPSN Guru Yang Akan Di Nilai
+=======
+                NPSN Guru Yang Akan Di Nilai {documentNames} & {npsn}
+>>>>>>> e01b401 (first commit)
               </label>
               <input
                 type="text"

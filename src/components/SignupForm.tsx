@@ -9,7 +9,10 @@ import { useRouter } from "next/router";
 
 const SignupForm: React.FC = () => {
   const [npsn, setNpsn] = useState("");
+<<<<<<< HEAD
   const [nipnuptk, setNipNuptk] = useState("");
+=======
+>>>>>>> e01b401 (first commit)
   const [password, setPassword] = useState("");
   const [pangkat, setPangkat] = useState("");
   const [jabatan, setJabatan] = useState("");
@@ -23,19 +26,30 @@ const SignupForm: React.FC = () => {
 
     try {
       // Cek apakah NPSN sudah terdaftar
+<<<<<<< HEAD
       const docRef = doc(db, "users", nipnuptk);
+=======
+      const docRef = doc(db, "users", npsn);
+>>>>>>> e01b401 (first commit)
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         // Jika NPSN sudah terdaftar, tampilkan pesan kesalahan
+<<<<<<< HEAD
         alert("NIP / NUPTK sudah terdaftar. Silahkan login.");
+=======
+        alert("NPSN sudah terdaftar. Silahkan login.");
+>>>>>>> e01b401 (first commit)
         return;
       }
 
       // Jika NPSN belum terdaftar, simpan data pengguna ke Firestore
       await setDoc(docRef, {
         npsn: npsn,
+<<<<<<< HEAD
         nipnuptk: nipnuptk,
+=======
+>>>>>>> e01b401 (first commit)
         nama: nama,
         pangkat: pangkat,
         jabatan: jabatan,
@@ -80,6 +94,7 @@ const SignupForm: React.FC = () => {
                   />
                 </div>
                 <div>
+<<<<<<< HEAD
                   <label htmlFor="npsn" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                     NIP / NUPTK
                   </label>
@@ -95,6 +110,8 @@ const SignupForm: React.FC = () => {
                   />
                 </div>
                 <div>
+=======
+>>>>>>> e01b401 (first commit)
                   <label htmlFor="nama" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                     Nama
                   </label>
@@ -111,14 +128,22 @@ const SignupForm: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="pangkat" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+<<<<<<< HEAD
                     Pangkat / Golongan Ruang
+=======
+                    Pangat/Golongan Ruang
+>>>>>>> e01b401 (first commit)
                   </label>
                   <input
                     type="text"
                     name="pangkat"
                     id="pangkat"
                     className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+<<<<<<< HEAD
                     placeholder="Pangkat / Golongan Ruang"
+=======
+                    placeholder="Pangkat/Golongan Ruang"
+>>>>>>> e01b401 (first commit)
                     required={true}
                     value={pangkat}
                     onChange={(e) => setPangkat(e.target.value)}
@@ -126,7 +151,11 @@ const SignupForm: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="jabatan" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+<<<<<<< HEAD
                     Jabatan
+=======
+                    jabatan
+>>>>>>> e01b401 (first commit)
                   </label>
                   <input
                     type="text"
@@ -148,7 +177,11 @@ const SignupForm: React.FC = () => {
                     name="unitKerja"
                     id="unitKerja"
                     className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+<<<<<<< HEAD
                     placeholder="Unit Kerja"
+=======
+                    placeholder="unit Kerja"
+>>>>>>> e01b401 (first commit)
                     required={true}
                     value={unitKerja}
                     onChange={(e) => setUnitkerja(e.target.value)}
@@ -156,14 +189,22 @@ const SignupForm: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="alamat" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+<<<<<<< HEAD
                     Alamat
+=======
+                    alamat
+>>>>>>> e01b401 (first commit)
                   </label>
                   <input
                     type="text"
                     name="alamat"
                     id="alamat"
                     className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+<<<<<<< HEAD
                     placeholder="Alamat"
+=======
+                    placeholder="alamat"
+>>>>>>> e01b401 (first commit)
                     required={true}
                     value={alamat}
                     onChange={(e) => setAlamat(e.target.value)}
@@ -184,7 +225,29 @@ const SignupForm: React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+<<<<<<< HEAD
                 
+=======
+                <div className="flex items-start">
+                  <div className="flex h-5 items-center">
+                    <input
+                      id="terms"
+                      aria-describedby="terms"
+                      type="checkbox"
+                      className="focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 h-4 w-4 rounded border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
+                      required={true}
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">
+                      I accept the{" "}
+                      <a className="text-primary-600 dark:text-primary-500 font-medium hover:underline" href="#">
+                        Terms and Conditions
+                      </a>
+                    </label>
+                  </div>
+                </div>
+>>>>>>> e01b401 (first commit)
                 <button
                   type="submit"
                   className="w-full rounded-lg bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

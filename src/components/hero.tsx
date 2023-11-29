@@ -10,10 +10,18 @@ function Hero() {
           <div className="mx-auto flex w-full text-left">
             <div className="relative mx-auto inline-flex items-center align-middle">
               <div className="text-center">
+<<<<<<< HEAD
                 <h1 className="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:max-w-7xl lg:text-6xl"> Penilaian Kinerja Guru <br className="hidden lg:block" />
                   Guru Penggerak
                 </h1>
                 <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-gray-500"></p>
+=======
+                <h1 className="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:max-w-7xl lg:text-6xl">
+                  Long headline to turn <br className="hidden lg:block" />
+                  your visitors into users
+                </h1>
+                <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-gray-500">Free and Premium themes, UI Kits, templates, and landing pages built with Tailwind CSS, HTML, & Next.js.</p>
+>>>>>>> e01b401 (first commit)
 
                 <div className="mx-auto mt-6 flex w-full max-w-2xl justify-center gap-2">
                   <div className="mt-3 rounded-lg sm:mt-0">
