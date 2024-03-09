@@ -8,6 +8,7 @@ import Container from '../container';
 import Heading from './heading';
 import Card from './card';
 import FloatingButton from '../floatingButton';
+import Cookies from 'js-cookie';
 
 // Definisikan tipe untuk data Anda
 type PertanyaanData = {
@@ -16,7 +17,8 @@ type PertanyaanData = {
 
 const SurveiPage: React.FC = () => {
   const router = useRouter();
-  const { nipnuptk, documentNames } = router.query;
+  const nipnuptk = Cookies.get('nipnuptk');
+  const { documentNames } = router.query;
   let documentNamesString = '';
   const [npsnPeninjau, setNpsnPeninjau] = useState('');
   const [npsnResponden, setNpsnResponden] = useState('');
@@ -96,7 +98,6 @@ const SurveiPage: React.FC = () => {
 
       router.push({
         pathname: '/dashboard',
-        query: { nipnuptk: nipnuptk },
       });
 
       // Redirect ke halaman dashboard

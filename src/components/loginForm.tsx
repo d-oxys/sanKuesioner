@@ -4,13 +4,13 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../API/firebase';
 import Link from 'next/link';
 import 'tailwindcss/tailwind.css';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
 
   const [nipnuptk, setNipNuptk] = useState('');
-
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e: FormEvent) => {
@@ -19,7 +19,6 @@ const LoginForm: React.FC = () => {
     try {
       // Mendapatkan data pengguna dari Firestore
       const docRef = doc(db, 'users', nipnuptk);
-
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -28,9 +27,13 @@ const LoginForm: React.FC = () => {
         if (userData.password === password) {
           console.log('Pengguna berhasil login:', nipnuptk);
           alert('Anda berhasil login');
+
+          // Menyimpan nipnuptk dan password ke dalam cookie
+          Cookies.set('nipnuptk', nipnuptk);
+          Cookies.set('password', password);
+
           router.push({
             pathname: '/dashboard',
-            query: { nipnuptk: nipnuptk },
           });
         } else {
           // Jika password salah, tampilkan pesan kesalahan
@@ -38,7 +41,6 @@ const LoginForm: React.FC = () => {
         }
       } else {
         // Jika NPSN tidak terdaftar, tampilkan pesan kesalahan
-
         alert('NIP / NUPTK tidak terdaftar. Silahkan daftar terlebih dahulu.');
       }
     } catch (error: any) {

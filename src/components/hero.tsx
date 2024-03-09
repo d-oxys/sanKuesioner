@@ -1,44 +1,102 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import TncLogo from '../../public/img/hero.png';
+import Cookies from 'js-cookie';
+import { useState, useEffect } from 'react';
+import Tentang from '@/components/tentang';
+import Footer from '@/components/footer';
+import { motion } from 'framer-motion';
+import { benefitUse, faqs } from '@/helpers/content';
 
 function Hero() {
-  return (
-    <>
-      <section>
-        <div className='relative w-full max-w-7xl items-center px-5 py-12 md:px-12 lg:px-16 lg:py-24'>
-          <div className='mx-auto flex w-full text-left'>
-            <div className='relative mx-auto inline-flex items-center align-middle'>
-              <div className='text-center'>
-                <h1 className='max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:max-w-7xl lg:text-6xl'>
-                  {' '}
-                  Penilaian Kinerja Guru <br className='hidden lg:block' />
-                  Guru Penggerak
-                </h1>
-                <p className='mx-auto mt-8 max-w-xl text-base leading-relaxed text-gray-500'></p>
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Cek apakah pengguna sudah login
+    const loggedIn = Cookies.get('nipnuptk') && Cookies.get('password');
+    setIsLoggedIn(Boolean(loggedIn));
+  }, []);
 
-                <div className='mx-auto mt-6 flex w-full max-w-2xl justify-center gap-2'>
-                  <div className='mt-3 rounded-lg sm:mt-0'>
+  return (
+    <div className='bg-white'>
+      <section>
+        <div className='jumbotron h-[calc(100vh-70px)] w-full bg-[#EAF7FF]'>
+          <div className='container mx-auto flex h-full flex-row items-center px-6 lg:space-x-8 lg:px-12 xl:px-24'>
+            <div className='flex w-full flex-col items-center justify-center space-y-5 lg:w-[50%] lg:items-start' data-aos='fade-right'>
+              <Image className='block lg:hidden' src={TncLogo} width={150} height={150} alt='Logo TNC' />
+              <h1 className='font-suisseNeue text-center text-2xl font-bold capitalize leading-normal md:text-3xl lg:text-left lg:text-4xl lg:leading-snug xl:text-5xl xl:leading-normal'>Penilaian Kinerja Guru Penggerak di Sekolah Dasar</h1>
+
+              <div className='flex flex-row space-x-3'>
+                {isLoggedIn ? (
+                  <Link href='/dashboard'>
+                    <button className='bg-primary-1 h-12 rounded-md px-4 text-sm font-semibold text-white  duration-500 hover:bg-blue-700 md:text-base'>Kembali Ke Dashboard</button>
+                  </Link>
+                ) : (
+                  <div>
                     <Link href='/login'>
-                      <button className='transform rounded-xl bg-blue-600 px-5 py-4 text-center text-base font-medium text-white transition duration-500 ease-in-out hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 lg:px-10'>
-                        Login
-                      </button>
+                      <button className='bg-primary-1 mr-4 h-12 rounded-md px-4 text-sm font-semibold  text-white duration-500 hover:bg-blue-700 md:text-base'>Login</button>
+                    </Link>
+
+                    <Link href='/SignUo'>
+                      <button className='bg-primary-2 h-12 rounded-md px-4 text-sm font-semibold text-white duration-500 hover:bg-blue-700 md:text-base'>Belum punya akun? Daftar dulu!</button>
                     </Link>
                   </div>
-                  <div className='mt-3 rounded-lg sm:ml-3 sm:mt-0'>
-                    <Link href='/SignUp'>
-                      <button className='block transform items-center rounded-xl border-2 border-white px-5 py-3.5 text-center text-base font-medium text-blue-600 shadow-md transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 lg:px-10'>
-                        Daftar
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+                )}
               </div>
+            </div>
+
+            <div className='relative hidden items-center lg:flex lg:h-[75%] lg:w-[50%]' data-aos='fade-left'>
+              <Image src={TncLogo} alt='Hero' priority={true} fill sizes='(max-width: 500px) 0vw, (max-width: 800px) 30vw, (max-width: 1200px) 40vw, 50vw' className='relative h-auto' />
             </div>
           </div>
         </div>
       </section>
-    </>
+
+      <section className='my-10'>
+        <div>
+          <motion.div
+            className='flex flex-col items-center text-center'
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              ease: 'easeInOut',
+              duration: 0.5,
+            }}
+          >
+            <h1 className='px-4 text-xl font-semibold sm:text-2xl '>Tutorial Mengisi Survei</h1>
+            <div className='bg-primary mt-2 h-[2px] w-28'></div>
+          </motion.div>
+          <div className='mx-auto mb-16 mt-14 grid max-w-6xl grid-cols-1 gap-4 px-4 md:grid-cols-2 md:gap-6'>
+            {benefitUse.map(({ name, description }, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  ease: 'easeInOut',
+                  duration: 0.5,
+                  y: { duration: 0.5 },
+                }}
+                className='rounded-md border bg-white p-5 shadow-sm'
+                key={name}
+              >
+                <h2 className='text-xl font-semibold'>{name}</h2>
+                <p className='mt-3 text-slate-600'>{description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className='my-10'>
+        <Tentang />
+      </section>
+
+      <section className='mt-10'>
+        <Footer />
+      </section>
+    </div>
   );
 }
 
