@@ -4,6 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../API/firebase';
 import DashboardLayout from './dashboardLayout';
 import DashboardCard from './dashboardCard';
+import Cookies from 'js-cookie';
 import 'tailwindcss/tailwind.css';
 
 type UserData = {
@@ -19,7 +20,7 @@ type UserData = {
 
 export default function Dashboard() {
   const router = useRouter();
-  const { nipnuptk } = router.query;
+  const nipnuptk = Cookies.get('nipnuptk');
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {

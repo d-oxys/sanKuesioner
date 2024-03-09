@@ -5,10 +5,11 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import DashboardCard from './dashboardCard';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 
 export default function ContentGuru() {
   const router = useRouter();
-  const { nipnuptk } = router.query;
+  const nipnuptk = Cookies.get('nipnuptk');
   const [documentNames, setDocumentNames] = useState<{ id: string; nama: string }[]>([]);
 
   useEffect(() => {

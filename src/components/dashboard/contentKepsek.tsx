@@ -5,10 +5,11 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import DashboardCard from './dashboardCard';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 
 export default function ContentGuru() {
   const router = useRouter();
-  const { nipnuptk } = router.query;
+  const nipnuptk = Cookies.get('nipnuptk');
   const [documentNames, setDocumentNames] = useState<{ id: string; nama: string }[]>([]);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function ContentGuru() {
   return (
     <DashboardLayout>
       <h1 className='mb-3 text-lg font-semibold md:text-2xl '>
-         KUESIONER KINERJA GURU PENGGERAK <span className='text-sm font-light'> (Kepala Sekolah)</span>
+        KUESIONER KINERJA GURU PENGGERAK <span className='text-sm font-light'> (Kepala Sekolah)</span>
       </h1>
       <DashboardCard borderColor='border-orange-500'>
         <h1 className='ml-2 flex items-center justify-between border-b-[1px] border-b-slate-300 px-2 py-4'>
@@ -70,9 +71,8 @@ export default function ContentGuru() {
                 <th scope='col' className='px-6 py-3'>
                   Nama
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope='col' className='px-6 py-3'>
                   NIP / NUPTK
-
                 </th>
                 <th scope='col' className='px-6 py-3'>
                   <span className='sr-only'>Edit</span>

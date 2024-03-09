@@ -1,9 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import Logo from '../../public/icon.png';
+import Cookies from 'js-cookie';
+
 function Header() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Cek apakah pengguna sudah login
+    const loggedIn = Cookies.get('nipnuptk') && Cookies.get('password');
+    setIsLoggedIn(Boolean(loggedIn));
+  }, []);
 
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
@@ -13,7 +24,7 @@ function Header() {
       <nav className='border-gray-200 bg-white dark:bg-gray-900'>
         <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
           <a href='https://flowbite.com/' className='flex items-center'>
-            <img src='https://flowbite.com/docs/images/logo.svg' className='mr-3 h-8' alt='Flowbite Logo' />
+            <Image src={Logo} alt='Flowbite Logo' className='mr-3 h-8 w-8' />
             <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>PKGP</span>
           </a>
           <button
@@ -35,22 +46,32 @@ function Header() {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  href='../login'
-                  className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <a
-                  href='../SignUp'
-                  className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
-                >
-                  Daftar
-                </a>
-              </li>
+              {isLoggedIn ? (
+                <li>
+                  <Link href='/dashboard'>
+                    <span className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'>
+                      Dashboard
+                    </span>
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link href='/login'>
+                      <span className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'>
+                        Login
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/SignUp'>
+                      <span className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'>
+                        Daftar
+                      </span>
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

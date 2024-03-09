@@ -2,6 +2,7 @@ import { useState, ReactNode } from 'react';
 import ListDashboard from './listDashboard';
 import ListGuru from './listGuru';
 import ListKepalaSekolah from './listKepalaSekolah';
+import ListHome from './listHome';
 import ListLogout from './listLogout';
 import 'tailwindcss/tailwind.css';
 
@@ -36,6 +37,7 @@ function Dashboard({ children }: CardProps) {
         <aside id='default-sidebar' className={`absolute left-0 z-40 h-screen w-64 transition-transform md:sticky ${isSidebarOpen ? 'translate-x-0' : ' -translate-x-full'} sm:translate-x-0`} aria-label='Sidebar'>
           <div className='h-full overflow-y-auto bg-[#222D32] px-3 py-4 dark:bg-gray-800'>
             <ul className='space-y-2 font-medium'>
+              <ListHome />
               <ListDashboard />
               <ListGuru />
               <ListKepalaSekolah />
