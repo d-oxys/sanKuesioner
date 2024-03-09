@@ -218,16 +218,16 @@ const DataKepsek: React.FC = () => {
                       let color = '';
                       let label = '';
 
-                      if (total >= 0 && total <= 60) {
+                      if (total >= 0 && total <= 32) {
                         color = 'text-red-600';
                         label = 'Kurang';
-                      } else if (total >= 61 && total <= 120) {
+                      } else if (total >= 33 && total <= 64) {
                         color = 'text-yellow-600';
                         label = 'Cukup';
-                      } else if (total >= 121 && total <= 180) {
+                      } else if (total >= 65 && total <= 96) {
                         color = 'text-blue-600';
                         label = 'Baik';
-                      } else if (total >= 181 && total <= 240) {
+                      } else if (total >= 97 && total <= 128) {
                         color = 'text-green-600';
                         label = 'Amat Baik';
                       }
