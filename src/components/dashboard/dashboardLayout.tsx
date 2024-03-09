@@ -39,7 +39,7 @@ function Dashboard({ children }: CardProps) {
             <ul className='space-y-2 font-medium'>
               <ListHome />
               <ListDashboard />
-              <ListGuru />
+              {/* <ListGuru /> */}
               <ListKepalaSekolah />
               <ListLogout />
             </ul>
