@@ -3,6 +3,7 @@ import ListDashboard from './listDashboard';
 import ListGuru from './listProfil';
 import ListKepalaSekolah from './listKepalaSekolah';
 import ListHome from './listHome';
+import ListIndeks from './listIndex';
 import ListLogout from './listLogout';
 import 'tailwindcss/tailwind.css';
 import { Poppins } from 'next/font/google';
@@ -65,6 +66,7 @@ function Dashboard({ children }: CardProps) {
                 <ListDashboard />
                 <ListGuru />
                 <ListKepalaSekolah />
+                <ListIndeks />
                 <ListLogout />
               </ul>
             </div>
