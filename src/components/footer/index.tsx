@@ -141,17 +141,7 @@ export default function Footer() {
           </div>
           <div>
             <h1 className='mb-3 text-2xl font-bold'>PKGP</h1>
-            <ul className='flex flex-col gap-3'>
-              <li>
-                <Link href={'#'}>Beranda</Link>
-              </li>
-              <li>
-                <Link href={'#'}>Artikel</Link>
-              </li>
-              <li>
-                <Link href={'#'}>Tentang</Link>
-              </li>
-            </ul>
+            <ul className='flex flex-col gap-3'></ul>
           </div>
         </div>
         <div className='mx-auto max-w-6xl text-center'>

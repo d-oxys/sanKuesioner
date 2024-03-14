@@ -29,6 +29,13 @@ const SurveiPage: React.FC = () => {
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
   const [prevNpsnResponden, setPrevNpsnResponden] = useState(npsnResponden);
 
+  useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
+
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
   } else if (Array.isArray(documentNames)) {

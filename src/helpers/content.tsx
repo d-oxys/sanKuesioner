@@ -24,7 +24,7 @@ export const teams = [
     },
   },
   {
-    name: 'Dr. Dede Trie Kurniawan, M.Pd',
+    name: 'Dr. H. Dede Margo Irianto, M.Pd',
     role: 'Pembimbing',
     univesity: 'Dosen PGSD UPI Kampus Cibiru',
     imageUrl: '/img/kurniawan-large.jpeg',
@@ -35,9 +35,9 @@ export const teams = [
     },
   },
   {
-    name: 'Juriah S.pd M.pd',
-    role: 'Pengawas',
-    univesity: 'SD Dinas Pendidikan Kab.Bandung',
+    name: 'Juriah, S.Pd., M.Pd',
+    role: 'Penelaah',
+    univesity: 'Pengawas SD Disdik Kab. Bandung',
     imageUrl: '/img/juriah-large.jpeg',
     socialMedia: {
       linkedin: 'https://www.linkedin.com/in/',
@@ -46,9 +46,9 @@ export const teams = [
     },
   },
   {
-    name: 'Neneng yuni Nurhayati S.pd, M.pd',
+    name: 'Neneng Yuni Nurhayati, S.Pd.,M.Pd',
     role: 'Penelaah',
-    univesity: 'SD Dinas Pendidikan Kab.Bandung',
+    univesity: 'Pengawas SD Disdik Kab. Bandung',
     imageUrl: '/img/yuni-large.jpeg',
     socialMedia: {
       linkedin: 'https://www.linkedin.com/in/',

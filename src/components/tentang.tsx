@@ -56,9 +56,6 @@ export default function Page() {
                         <Link href={team.socialMedia.instagram} target='_blank' className='text-2xl text-zinc-600 hover:text-red-600'>
                           <RiInstagramLine />
                         </Link>
-                        <Link href={team.socialMedia.github} target='_blank' className='text-2xl text-zinc-600 hover:text-black'>
-                          <RiGithubFill />
-                        </Link>
                       </div>
                     </div>
                   </motion.li>

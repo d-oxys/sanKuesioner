@@ -24,7 +24,9 @@ function Hero() {
           <div className='container mx-auto flex h-full flex-row items-center px-6 lg:space-x-8 lg:px-12 xl:px-24'>
             <div className='flex w-full flex-col items-center justify-center space-y-5 lg:w-[50%] lg:items-start' data-aos='fade-right'>
               <Image className='block lg:hidden' src={TncLogo} width={150} height={150} alt='Logo TNC' />
-              <h1 className='font-suisseNeue text-center text-2xl font-bold capitalize leading-normal md:text-3xl lg:text-left lg:text-4xl lg:leading-snug xl:text-5xl xl:leading-normal'>Penilaian Kinerja Guru Penggerak di Sekolah Dasar</h1>
+              <h1 className='font-suisseNeue text-center text-2xl font-bold capitalize leading-normal text-slate-800 md:text-3xl lg:text-left lg:text-3xl lg:leading-snug xl:text-5xl xl:leading-normal'>
+                Penilaian Kinerja Guru Penggerak (PKGP) <span className='block'>Di Sekolah Dasar</span>
+              </h1>
 
               <div className='flex flex-row space-x-3'>
                 {isLoggedIn ? (

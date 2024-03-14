@@ -3,8 +3,12 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import 'tailwindcss/tailwind.css';
 import type { AppProps } from 'next/app';
+import { Poppins } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'], // or any other valid weight value
+});
 
 export const metadata: Metadata = {
   title: 'Penilain Kinerja Guru',

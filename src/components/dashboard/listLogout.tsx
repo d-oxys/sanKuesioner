@@ -6,6 +6,11 @@ function ListLogout() {
   const router = useRouter();
 
   const handleLogout = () => {
+    // Meminta konfirmasi dari pengguna
+    if (!window.confirm('Apakah Anda yakin ingin logout?')) {
+      return;
+    }
+
     // Menghapus cookie
     Cookies.remove('nipnuptk');
     Cookies.remove('password');
