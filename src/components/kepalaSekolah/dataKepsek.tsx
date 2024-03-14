@@ -3,6 +3,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import { auth, db } from '../../API/firebase';
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import 'tailwindcss/tailwind.css';
+import Cookies from 'js-cookie';
 import { Router, useRouter } from 'next/router';
 import Container from '../container';
 import FloatingButton from '../floatingButton';
@@ -51,6 +52,14 @@ const DataKepsek: React.FC = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [kuesionerData, setKuesionerData] = useState<KuesionerData | null>(null);
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
+  const nipnuptk = Cookies.get('nipnuptk');
+
+  useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
 
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
