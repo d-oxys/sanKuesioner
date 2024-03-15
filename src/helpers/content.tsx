@@ -24,7 +24,7 @@ export const teams = [
     },
   },
   {
-    name: 'Dr. H. Dede Margo Irianto, M.Pd',
+    name: 'Dr. Dede Trie Kurniawan, M.pd',
     role: 'Pembimbing',
     univesity: 'Dosen PGSD UPI Kampus Cibiru',
     imageUrl: '/img/kurniawan-large.jpeg',
