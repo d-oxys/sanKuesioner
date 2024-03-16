@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Tentang from '@/components/tentang';
 import Footer from '@/components/footer';
 import { motion } from 'framer-motion';
-import { benefitUse, faqs } from '@/helpers/content';
+import { benefitUse, faqs, youtubeVideo } from '@/helpers/content';
 
 function Hero() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,7 +19,7 @@ function Hero() {
 
   return (
     <div className='bg-white'>
-      <section>
+      <section id='hero'>
         <div className='jumbotron h-[calc(100vh-70px)] w-full bg-[#EAF7FF]'>
           <div className='container mx-auto flex h-full flex-row items-center px-6 lg:space-x-8 lg:px-12 xl:px-24'>
             <div className='flex w-full flex-col items-center justify-center space-y-5 lg:w-[50%] lg:items-start' data-aos='fade-right'>
@@ -54,7 +54,7 @@ function Hero() {
         </div>
       </section>
 
-      <section className='my-10'>
+      <section id='tutorial' className='my-10 py-10'>
         <div>
           <motion.div
             className='flex flex-col items-center text-center'
@@ -88,10 +88,13 @@ function Hero() {
               </motion.div>
             ))}
           </div>
+          <div className='mb-10 flex justify-center'>
+            <iframe width='1100' height='550' src={youtubeVideo} title='YouTube video player' frameBorder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>
+          </div>
         </div>
       </section>
 
-      <section className='my-10'>
+      <section id='tentang' className='mb-10 mt-16'>
         <Tentang />
       </section>
 

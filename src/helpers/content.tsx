@@ -91,3 +91,5 @@ export const faqs = [
     answer: 'Ya, Kasa Talk menyediakan contoh Gerakan Workout. Contoh-contoh ini dapat membantu Anda memahami bagaimana workout yang benar',
   },
 ];
+
+export const youtubeVideo = 'https://www.youtube.com/embed/1_cmNWF5NQw';

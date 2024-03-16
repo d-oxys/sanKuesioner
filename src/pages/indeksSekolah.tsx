@@ -41,10 +41,13 @@ async function getSchoolRankings() {
 
     // Hitung jumlah guru penggerak untuk setiap sekolah
     if (data.asalSekolah) {
-      if (schoolCounts[data.asalSekolah]) {
-        schoolCounts[data.asalSekolah]++;
+      // Ubah nama sekolah menjadi huruf kecil
+      const schoolName = data.asalSekolah.toLowerCase().trim();
+
+      if (schoolCounts[schoolName]) {
+        schoolCounts[schoolName]++;
       } else {
-        schoolCounts[data.asalSekolah] = 1;
+        schoolCounts[schoolName] = 1;
       }
     }
   });
@@ -103,10 +106,10 @@ export default function SchoolRankings() {
   return (
     <Layout>
       <Card borderColor='border-orange-500'>
-        <div className='flex flex-col'>
+        <div className='flex flex-col overflow-auto'>
           <h1 className='mt-4 text-center text-2xl font-bold'>Peringkat Sekolah</h1>
-          <div className='flex items-center justify-between'>
-            <div className='flex overflow-x-auto'>
+          <div className='block items-center justify-between md:flex'>
+            <div className='flex overflow-x-auto overflow-y-auto'>
               <table className='w-full divide-y divide-gray-200'>
                 <thead className='bg-gray-50'>
                   <tr>
@@ -115,10 +118,10 @@ export default function SchoolRankings() {
                     <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>Warna</th>
                   </tr>
                 </thead>
-                <tbody className='divide-y divide-gray-200 bg-white'>
+                <tbody className='divide-y divide-gray-200 bg-white capitalize'>
                   {rankings.map((ranking, index) => (
                     <tr key={index}>
-                      <td className='whitespace-nowrap px-6 py-4'>{ranking.asalSekolah}</td>
+                      <td className='whitespace-nowrap px-6 py-4 uppercase'>{ranking.asalSekolah}</td>
                       <td className='whitespace-nowrap px-6 py-4'>{ranking.jumlahGuruPenggerak}</td>
                       <td className='whitespace-nowrap px-6 py-4'>
                         <div className='h-4 w-4' style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
@@ -128,7 +131,7 @@ export default function SchoolRankings() {
                 </tbody>
               </table>
             </div>
-            <div className='flex'>
+            <div className='block overflow-auto md:flex md:flex-row'>
               <PieChart width={400} height={400} className=''>
                 <Pie data={rankings} cx={200} cy={200} labelLine={false} outerRadius={180} fill='#8884d8' dataKey='jumlahGuruPenggerak'>
                   {rankings.map((entry, index) => (
