@@ -4,6 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../API/firebase';
 import DashboardLayout from './dashboardLayout';
 import DashboardCard from './dashboardCard';
+import Cookies from 'js-cookie';
 import 'tailwindcss/tailwind.css';
 
 type UserData = {
@@ -19,7 +20,7 @@ type UserData = {
 
 export default function Dashboard() {
   const router = useRouter();
-  const { nipnuptk } = router.query;
+  const nipnuptk = Cookies.get('nipnuptk');
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
@@ -40,12 +41,13 @@ export default function Dashboard() {
   return (
     <DashboardLayout>
       <h1 className='mb-3 text-lg font-semibold md:text-2xl'>
-        KUESIONER KINERJA GURU PENGGERAK<span className='text-sm font-light'> </span>
+        Pejabat Penilai (Kepala Sekolah)
+        <span className='text-sm font-light'> </span>
       </h1>
 
       <DashboardCard borderColor='border-blue-400'>
         <h1 className='border-b-[1px] border-b-slate-300 px-2 py-4'>Biodata </h1>
-        <div className='mx-2 mb-3 h-full w-full p-2 text-xs font-normal md:text-base md:last:font-medium'>
+        <div className='mx-2 mb-3 h-full w-full p-2 text-xs font-normal capitalize md:text-base md:last:font-medium'>
           {userData && (
             <table>
               <tr>

@@ -3,6 +3,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import { auth, db } from '../../API/firebase';
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import 'tailwindcss/tailwind.css';
+import Cookies from 'js-cookie';
 import { Router, useRouter } from 'next/router';
 import Container from '../container';
 import FloatingButton from '../floatingButton';
@@ -51,6 +52,14 @@ const DataKepsek: React.FC = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [kuesionerData, setKuesionerData] = useState<KuesionerData | null>(null);
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
+  const nipnuptk = Cookies.get('nipnuptk');
+
+  useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
 
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
@@ -218,16 +227,16 @@ const DataKepsek: React.FC = () => {
                       let color = '';
                       let label = '';
 
-                      if (total >= 0 && total <= 60) {
+                      if (total >= 0 && total <= 32) {
                         color = 'text-red-600';
                         label = 'Kurang';
-                      } else if (total >= 61 && total <= 120) {
+                      } else if (total >= 33 && total <= 64) {
                         color = 'text-yellow-600';
                         label = 'Cukup';
-                      } else if (total >= 121 && total <= 180) {
+                      } else if (total >= 65 && total <= 96) {
                         color = 'text-blue-600';
                         label = 'Baik';
-                      } else if (total >= 181 && total <= 240) {
+                      } else if (total >= 97 && total <= 128) {
                         color = 'text-green-600';
                         label = 'Amat Baik';
                       }

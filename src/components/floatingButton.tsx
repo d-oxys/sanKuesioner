@@ -8,7 +8,6 @@ const FloatingButton: React.FC = () => {
   const handleBackToDashboard = () => {
     router.push({
       pathname: '/dashboard',
-      query: { nipnuptk: nipnuptk },
     });
   };
 

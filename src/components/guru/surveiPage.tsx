@@ -8,6 +8,7 @@ import Container from '../container';
 import Heading from './heading';
 import Card from './card';
 import FloatingButton from '../floatingButton';
+import Cookies from 'js-cookie';
 
 // Definisikan tipe untuk data Anda
 type PertanyaanData = {
@@ -16,7 +17,8 @@ type PertanyaanData = {
 
 const SurveiPage: React.FC = () => {
   const router = useRouter();
-  const { nipnuptk, documentNames } = router.query;
+  const nipnuptk = Cookies.get('nipnuptk');
+  const { documentNames } = router.query;
   let documentNamesString = '';
   const [npsnPeninjau, setNpsnPeninjau] = useState('');
   const [npsnResponden, setNpsnResponden] = useState('');
@@ -26,6 +28,13 @@ const SurveiPage: React.FC = () => {
   // Cast data Anda ke tipe yang baru dibuat
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
   const [prevNpsnResponden, setPrevNpsnResponden] = useState(npsnResponden);
+
+  useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
 
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
@@ -96,7 +105,6 @@ const SurveiPage: React.FC = () => {
 
       router.push({
         pathname: '/dashboard',
-        query: { nipnuptk: nipnuptk },
       });
 
       // Redirect ke halaman dashboard

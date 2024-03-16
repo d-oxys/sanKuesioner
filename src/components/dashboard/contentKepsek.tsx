@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import DashboardLayout from './dashboardLayout';
 import { db } from '../../API/firebase';
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import DashboardCard from './dashboardCard';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+
+type UserData = {
+  nama: string;
+  tempatTanggalLahir: string;
+  nipnuptk: string;
+  jenisKelamin: string;
+  unitKerja: string;
+  asalSekolah: string;
+  npsnResponden: string;
+  profilePicture?: string;
+};
 
 export default function ContentGuru() {
   const router = useRouter();
-  const { nipnuptk } = router.query;
+  const [usersData, setUsersData] = useState<UserData[]>([]);
+  const nipnuptk = Cookies.get('nipnuptk');
   const [documentNames, setDocumentNames] = useState<{ id: string; nama: string }[]>([]);
 
   useEffect(() => {
@@ -22,25 +36,37 @@ export default function ContentGuru() {
     getDocumentNames();
   }, []);
 
-  const handleDelete = async (name: string) => {
+  const handleDelete = async (npsnResponden: string) => {
     // Tampilkan konfirmasi sebelum menghapus
     if (!window.confirm('Apakah Anda yakin ingin menghapus dokumen ini?')) {
       return;
     }
 
     try {
-      // Hapus dokumen dari Firebase
-      const docRef = doc(db, 'kuesionerKepSek', name);
-      await deleteDoc(docRef);
+      // Dapatkan URL foto profil dari Firestore.
+      const userRef = doc(db, 'kuesionerKepSek', npsnResponden);
+      const userSnap = await getDoc(userRef);
+      const profilePicture = userSnap.data()?.profilePicture;
 
-      // Hapus nama dari state documentNames
-      setDocumentNames(documentNames.filter((docName) => docName.id !== name));
+      // Hapus foto dari Firebase Storage.
+      if (profilePicture) {
+        const storage = getStorage();
+        const profilePictureRef = ref(storage, profilePicture);
+        await deleteObject(profilePictureRef);
+      }
 
-      alert('Dokumen berhasil dihapus');
+      // Hapus dokumen dari Firestore.
+      await deleteDoc(userRef);
+
+      // Hapus data pengguna dari state usersData.
+      setUsersData(usersData.filter((user) => user.npsnResponden !== npsnResponden));
+
+      alert('Dokumen dan foto berhasil dihapus');
+      window.location.reload();
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.error('Terjadi kesalahan saat menghapus dokumen:', error);
-        alert(`Dokumen gagal dihapus karena: ${error.message}`);
+        console.error('Terjadi kesalahan saat menghapus dokumen dan foto:', error);
+        alert(`Dokumen dan foto gagal dihapus karena: ${error.message}`);
       }
     }
   };
@@ -48,7 +74,7 @@ export default function ContentGuru() {
   return (
     <DashboardLayout>
       <h1 className='mb-3 text-lg font-semibold md:text-2xl '>
-         KUESIONER KINERJA GURU PENGGERAK <span className='text-sm font-light'> (Kepala Sekolah)</span>
+        KUESIONER KINERJA GURU PENGGERAK <span className='text-sm font-light'> (Kepala Sekolah)</span>
       </h1>
       <DashboardCard borderColor='border-orange-500'>
         <h1 className='ml-2 flex items-center justify-between border-b-[1px] border-b-slate-300 px-2 py-4'>
@@ -70,9 +96,8 @@ export default function ContentGuru() {
                 <th scope='col' className='px-6 py-3'>
                   Nama
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope='col' className='px-6 py-3'>
                   NIP / NUPTK
-
                 </th>
                 <th scope='col' className='px-6 py-3'>
                   <span className='sr-only'>Edit</span>

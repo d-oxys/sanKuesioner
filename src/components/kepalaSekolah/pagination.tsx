@@ -42,6 +42,13 @@ export default function Pagination({ data }: { data: Data[] }) {
   }
 
   useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (documentNames) {
         const docRef = doc(db, 'kuesionerKepSek', documentNamesString);
