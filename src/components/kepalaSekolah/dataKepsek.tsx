@@ -8,6 +8,7 @@ import { Router, useRouter } from 'next/router';
 import Container from '../container';
 import FloatingButton from '../floatingButton';
 import ReactLoading from 'react-loading';
+import DownloadPDF from '../downloadPDF';
 
 type PertanyaanData = {
   kategori: string;
@@ -57,13 +58,14 @@ const DataKepsek: React.FC = () => {
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
   const nipnuptk = Cookies.get('nipnuptk');
   const [isLoading, setIsLoading] = useState(false);
+  const yourData = 'Your data here';
 
-  // useEffect(() => {
-  //   if (!nipnuptk) {
-  //     alert('Anda harus login terlebih dahulu');
-  //     router.push('/');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
 
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
@@ -92,28 +94,10 @@ const DataKepsek: React.FC = () => {
     fetchData();
   }, [documentNamesString]);
 
-  const handlePDF = async () => {
-    setIsLoading(true);
-    // Tambahkan parameter ?view=true ke URL dan ganti nama file menjadi {documentNames}.pdf
-    const res = await fetch(`/api/pdf?url=${encodeURIComponent(window.location.href + '&view=true')}`);
-    const blob = await res.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${documentNames}.pdf`;
-    a.click();
-    setIsLoading(false);
-  };
-
   return (
     <>
       <Container>
         {!isViewMode && <FloatingButton />}
-        {!isViewMode && (
-          <button onClick={handlePDF} className='fixed left-4 top-4 cursor-pointer rounded bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600'>
-            Download PDF
-          </button>
-        )}
         {isLoading && (
           <div
             style={{
@@ -132,6 +116,7 @@ const DataKepsek: React.FC = () => {
             <ReactLoading type={'spin'} color={'#fff'} />
           </div>
         )}
+        <DownloadPDF data={yourData} />
         <div className='my-5 overflow-auto rounded-sm bg-white md:w-[65%]'>
           <h1 className='py-4 text-center text-lg font-semibold md:text-2xl'>
             HASIL PENILAIAN KUESIONER <span className='block'>KINERJA GURU PENGGERAK</span>
