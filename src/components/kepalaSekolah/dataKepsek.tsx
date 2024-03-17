@@ -88,6 +88,17 @@ const DataKepsek: React.FC = () => {
     fetchData();
   }, [documentNamesString]);
 
+  const handlePDF = async () => {
+    // Ganti '/api/pdf' dengan path ke API Anda
+    const res = await fetch(`/api/pdf?url=${encodeURIComponent(window.location.href)}`);
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'file.pdf';
+    a.click();
+  };
+
   return (
     <>
       <Container>
@@ -240,8 +251,15 @@ const DataKepsek: React.FC = () => {
                         color = 'text-green-600';
                         label = 'Amat Baik';
                       }
-
-                      return <td className={`border border-black p-2 px-4 text-center ${color}`}>{label}</td>;
+                      return (
+                        <div>
+                          <td className={`border border-black p-2 px-4 text-center ${color}`}>{label}</td>
+                          <td className={`border border-black p-2 px-4 text-center`}>
+                            <button onClick={handlePDF}>Download PDF</button>
+                          </td>
+                          ;
+                        </div>
+                      );
                     })()}
                   </tr>
                 </tfoot>
