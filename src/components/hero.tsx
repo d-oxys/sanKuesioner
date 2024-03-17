@@ -5,6 +5,7 @@ import TncLogo from '../../public/img/hero.png';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 import Tentang from '@/components/tentang';
+import Tutorial from '@/components/tutorial';
 import Footer from '@/components/footer';
 import { motion } from 'framer-motion';
 import { benefitUse, faqs, youtubeVideo } from '@/helpers/content';
@@ -56,37 +57,19 @@ function Hero() {
 
       <section id='tutorial' className='my-10 py-10 capitalize'>
         <div>
-          <motion.div
-            className='flex flex-col items-center text-center'
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              ease: 'easeInOut',
-              duration: 0.5,
-            }}
-          >
-            <h1 className='px-4 text-xl font-semibold sm:text-2xl '>Tutorial Mengisi Survei</h1>
-            <div className='bg-primary mt-2 h-[2px] w-28'></div>
-          </motion.div>
-          <div className='mx-auto mb-16 mt-14 grid max-w-6xl grid-cols-1 gap-4 px-4 md:grid-cols-2 md:gap-6'>
-            {benefitUse.map(({ name, description }, index) => (
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  ease: 'easeInOut',
-                  duration: 0.5,
-                  y: { duration: 0.5 },
-                }}
-                className='rounded-md border bg-white p-5 shadow-sm'
-                key={name}
-              >
-                <h2 className='text-xl font-semibold'>{name}</h2>
-                <p className='mt-3 text-slate-600'>{description}</p>
-              </motion.div>
-            ))}
+          <div className='mb-16 mt-14 w-full'>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                ease: 'easeInOut',
+                duration: 0.5,
+                y: { duration: 0.5 },
+              }}
+            >
+              <Tutorial />
+            </motion.div>
           </div>
           <div className='mb-10 flex justify-center'>
             <iframe width='1100' height='550' src={youtubeVideo} title='YouTube video player' frameBorder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>

@@ -73,6 +73,21 @@ export const benefitUse = [
   },
 ];
 
+export const Tutorial = [
+  {
+    img: '/path/img',
+    description: 'Anda harus memopunyai akun terlebih dahulu anda bisa daftar dengan klil tombol daftar jika anda sudah mempunyai akun maka klik tombol login',
+  },
+  {
+    img: '/path/img',
+    description: 'Setelah Login anda akan di arahkan ke dashboard lalu anda bisa memilih survei apa yang ingin anda lakukan',
+  },
+  {
+    img: '/path/img',
+    description: 'isikan data yang sesuai lalu isi survei guru, jika tidak sesuai maka anda bisa memilih fitur edit atau hapus',
+  },
+];
+
 export const faqs = [
   {
     question: 'Apakah FlexForce Gratis?',
@@ -92,4 +107,4 @@ export const faqs = [
   },
 ];
 
-export const youtubeVideo = 'https://www.youtube.com/embed/1_cmNWF5NQw';
+export const youtubeVideo = 'https://www.youtube.com/embed/UGPYOF5xdck';

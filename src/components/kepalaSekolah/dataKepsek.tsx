@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { Router, useRouter } from 'next/router';
 import Container from '../container';
 import FloatingButton from '../floatingButton';
+import ReactLoading from 'react-loading';
 
 type PertanyaanData = {
   kategori: string;
@@ -48,18 +49,21 @@ type KuesionerData = {
 const DataKepsek: React.FC = () => {
   const router = useRouter();
   const { documentNames } = router.query;
+  const { view } = router.query;
+  const isViewMode = view === 'true';
   let documentNamesString = '';
   const [userData, setUserData] = useState<UserData | null>(null);
   const [kuesionerData, setKuesionerData] = useState<KuesionerData | null>(null);
   const pertanyaanData = require('../../API/guru.json') as PertanyaanData;
   const nipnuptk = Cookies.get('nipnuptk');
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (!nipnuptk) {
-      alert('Anda harus login terlebih dahulu');
-      router.push('/');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!nipnuptk) {
+  //     alert('Anda harus login terlebih dahulu');
+  //     router.push('/');
+  //   }
+  // }, []);
 
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
@@ -89,20 +93,45 @@ const DataKepsek: React.FC = () => {
   }, [documentNamesString]);
 
   const handlePDF = async () => {
-    // Ganti '/api/pdf' dengan path ke API Anda
-    const res = await fetch(`/api/pdf?url=${encodeURIComponent(window.location.href)}`);
+    setIsLoading(true);
+    // Tambahkan parameter ?view=true ke URL dan ganti nama file menjadi {documentNames}.pdf
+    const res = await fetch(`/api/pdf?url=${encodeURIComponent(window.location.href + '&view=true')}`);
     const blob = await res.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'file.pdf';
+    a.download = `${documentNames}.pdf`;
     a.click();
+    setIsLoading(false);
   };
 
   return (
     <>
       <Container>
-        <FloatingButton />
+        {!isViewMode && <FloatingButton />}
+        {!isViewMode && (
+          <button onClick={handlePDF} className='fixed left-4 top-4 cursor-pointer rounded bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600'>
+            Download PDF
+          </button>
+        )}
+        {isLoading && (
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              zIndex: 9999,
+            }}
+          >
+            <ReactLoading type={'spin'} color={'#fff'} />
+          </div>
+        )}
         <div className='my-5 overflow-auto rounded-sm bg-white md:w-[65%]'>
           <h1 className='py-4 text-center text-lg font-semibold md:text-2xl'>
             HASIL PENILAIAN KUESIONER <span className='block'>KINERJA GURU PENGGERAK</span>
@@ -251,15 +280,7 @@ const DataKepsek: React.FC = () => {
                         color = 'text-green-600';
                         label = 'Amat Baik';
                       }
-                      return (
-                        <div>
-                          <td className={`border border-black p-2 px-4 text-center ${color}`}>{label}</td>
-                          <td className={`border border-black p-2 px-4 text-center`}>
-                            <button onClick={handlePDF}>Download PDF</button>
-                          </td>
-                          ;
-                        </div>
-                      );
+                      return <td className={`border border-black p-2 px-4 text-center ${color}`}>{label}</td>;
                     })()}
                   </tr>
                 </tfoot>

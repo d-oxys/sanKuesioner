@@ -7,7 +7,10 @@ const saveAsPdf = async (url: string) => {
 
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 0 });
 
-  const result = await page.pdf({ format: 'a4' });
+  // Tunggu selama 15 detik
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+
+  const result = await page.pdf({ format: 'A3' });
   await browser.close();
   return result;
 };
