@@ -10,7 +10,8 @@ import FloatingButton from '../floatingButton';
 import ReactLoading from 'react-loading';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import pertanyaanDataTable from '../../API/guru.json';
+import '../../../public/font/Poppins-Regular-normal';
+import pertanyaanDataTable from '../../API/kepalaSekolah.json';
 
 type PertanyaanData = {
   kategori: string;
@@ -125,9 +126,9 @@ const DataKepsek: React.FC = () => {
       })
       .map((key, index) => {
         // Memisahkan nomor dan teks pertanyaan
-        const questionText = questionMap[key] || key;
+        const questionText = (questionMap[key] || key).trim(); // Gunakan trim di sini
         const questionNumber = questionText.split('.')[0];
-        const questionBody = questionText.split('.').slice(1).join('.');
+        const questionBody = questionText.split('.').slice(1).join('.').trim(); // Gunakan trim lagi di sini
 
         return [
           questionNumber, // Nomor pertanyaan
@@ -136,14 +137,123 @@ const DataKepsek: React.FC = () => {
         ];
       });
 
+    // Hitung total
+    const total = Object.values(kuesionerData.jawaban).reduce((a, b) => a + Number(b), 0);
+    let label = '';
+
+    if (total >= 0 && total <= 32) {
+      label = 'Kurang';
+    } else if (total >= 33 && total <= 64) {
+      label = 'Cukup';
+    } else if (total >= 65 && total <= 96) {
+      label = 'Baik';
+    } else if (total >= 97 && total <= 128) {
+      label = 'Amat Baik';
+    }
+
+    // Tambahkan baris total ke data tabel
+    tableData.push(['', 'Total', total.toString()]);
+    tableData.push(['', 'Label', label]);
+
+    doc.addFont('Poppins-Regular.ttf', 'Poppins', 'normal');
+
+    // Menambahkan judul
+    doc.setFontSize(25);
+    doc.setFont('courier', 'bold');
+    doc.text('HASIL PENILAIAN KUESIONER', 105, 20, { align: 'center' });
+    doc.setFontSize(25);
+    doc.setFont('courier', 'bold');
+    doc.text('KINERJA GURU PENGGERAK', 105, 30, { align: 'center' });
+    doc.setFont('courier', 'normal');
+
+    // Menambahkan data pengguna
+    doc.setFontSize(12);
+    doc.text(`Nama   : ${userData?.nama}`, 20, 50);
+    doc.text(`NPSN   : ${userData?.npsn}`, 20, 60);
+    doc.text(`NIP/NUPTK: ${userData?.nipnuptk}`, 20, 70);
+    doc.text(`Alamat : ${userData?.alamat}`, 20, 80);
+    doc.text(`Jabatan: ${userData?.jabatan}`, 20, 90);
+    doc.text(`Pangkat: ${userData?.pangkat}`, 20, 100);
+    doc.text(`Unit Kerja: ${userData?.unitKerja}`, 20, 110);
+
+    doc.setFont('courier', 'bold');
+    doc.text('MENYATAKAN BAHWA : ', 20, 120);
+    doc.setFont('courier', 'normal');
+
+    doc.setFontSize(12);
+    doc.text(`Nama   : ${kuesionerData?.nama}`, 20, 130);
+    doc.text(`NPSN   : ${kuesionerData?.npsnResponden}`, 20, 140);
+    doc.text(`Asal Sekolah: ${kuesionerData?.asalSekolah}`, 20, 150);
+    doc.text(`TTL : ${kuesionerData?.tempatTanggalLahir}`, 20, 160);
+    doc.text(`Jenis Kelamin: ${kuesionerData?.jenisKelamin}`, 20, 170);
+    doc.text(`Pangkat: ${kuesionerData?.pangkat}`, 20, 180);
+    doc.text(`TMT: ${kuesionerData?.TMT}`, 20, 190);
+    doc.text(`Masa Kerja: ${kuesionerData?.masaKerja}`, 20, 200);
+    doc.text(`Pendidikan Terakhir: ${kuesionerData?.pendidikanTerakhir}`, 20, 210);
+
+    doc.setFont('courier', 'bold');
+    doc.text('Telah melaksanakan kegiatan program guru penggerak : ', 20, 230);
+    doc.setFont('courier', 'normal');
+
     // @ts-ignore
     doc.autoTable({
+      startY: 240,
       head: [['No', 'Pertanyaan', 'Jawaban']],
       body: tableData,
+      styles: {
+        halign: 'center',
+        lineWidth: 0.05,
+        lineColor: [0, 0, 0],
+      },
+      columnStyles: {
+        0: { cellWidth: 'auto', halign: 'center' },
+        1: { cellWidth: 'auto', halign: 'left' },
+        2: { cellWidth: 'auto' },
+      },
     });
 
-    // Menghasilkan PDF dan memungkinkan pengguna untuk mendownloadnya
-    doc.save('kuesioner.pdf');
+    // // Menghasilkan PDF dan memungkinkan pengguna untuk mendownloadnya
+    // doc.save('kuesioner.pdf');
+    return new Promise<Blob>((resolve, reject) => {
+      try {
+        const dataURI = doc.output('datauristring');
+        const byteString = atob(dataURI.split(',')[1]);
+        const byteNumbers = new Array(byteString.length);
+        for (let i = 0; i < byteString.length; i++) {
+          byteNumbers[i] = byteString.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+        resolve(blob);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  const viewPDF = async (kuesionerData: KuesionerData) => {
+    try {
+      const blob = await generatePDF(kuesionerData);
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
+
+  const downloadPDF = async (kuesionerData: KuesionerData) => {
+    try {
+      const blob = await generatePDF(kuesionerData);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'kuesioner.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
   };
 
   return (
@@ -168,7 +278,10 @@ const DataKepsek: React.FC = () => {
             <ReactLoading type={'spin'} color={'#fff'} />
           </div>
         )}
-        <button onClick={() => kuesionerData && generatePDF(kuesionerData)}>Download PDF</button>
+        <button onClick={() => kuesionerData && viewPDF(kuesionerData)} className='fixed left-4 top-4 cursor-pointer rounded bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600'>
+          Unduh PDF
+        </button>
+
         <div className='my-5 overflow-auto rounded-sm bg-white md:w-[65%]'>
           <h1 className='py-4 text-center text-lg font-semibold md:text-2xl'>
             HASIL PENILAIAN KUESIONER <span className='block'>KINERJA GURU PENGGERAK</span>
