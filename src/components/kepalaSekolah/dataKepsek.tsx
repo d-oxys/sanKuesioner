@@ -137,7 +137,7 @@ const DataKepsek: React.FC = () => {
       });
 
     // @ts-ignore
-    doc.autoTable(undefined, {
+    doc.autoTable({
       head: [['No', 'Pertanyaan', 'Jawaban']],
       body: tableData,
     });
