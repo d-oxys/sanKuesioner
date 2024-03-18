@@ -47,7 +47,7 @@ const Biodata: React.FC<BiodataProps> = ({
     <div>
       <Card>
         <label htmlFor='npsn' className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'>
-          NPSN
+          NIP
         </label>
         <input
           type='text'
