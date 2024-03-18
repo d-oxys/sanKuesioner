@@ -136,7 +136,7 @@ const DataKepsek: React.FC = () => {
         ];
       });
 
-    // Menambahkan tabel ke dokumen
+    // @ts-ignore
     doc.autoTable(undefined, {
       head: [['No', 'Pertanyaan', 'Jawaban']],
       body: tableData,
