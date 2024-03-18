@@ -15,6 +15,7 @@
     "flowbite-react": "^0.6.4",
     "framer-motion": "^11.0.8",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "next": "14.0.1",
     "puppeteer": "^22.5.0",
     "react": "^18",
