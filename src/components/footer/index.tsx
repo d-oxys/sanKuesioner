@@ -6,6 +6,8 @@ import { useState } from 'react';
 import Dialog from './dialog';
 import { RiMailAddLine } from 'react-icons/ri';
 import { ErrorMessage, SuccessMessage } from './message';
+import { addDoc, collection } from 'firebase/firestore';
+import { auth, db } from '../../API/firebase';
 
 export default function Footer() {
   const [close, setClose] = useState(true);
@@ -30,56 +32,23 @@ export default function Footer() {
   const handleSubmitEmail = async (e: any) => {
     e.preventDefault();
 
+    // Validasi email
     if (!validateEmail(email)) {
-      setStatusMessage('Masukkan alamat email yang valid');
+      console.log('Email tidak valid');
       return;
     }
 
-    setIsLoading(true);
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/send-message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          name,
-          subject,
-          message,
-        }),
+      const docRef = await addDoc(collection(db, 'message'), {
+        email: email,
+        name: name,
+        subject: subject,
+        message: message,
       });
 
-      if (res.ok) {
-        setEmail('');
-        setName('');
-        setSubject('');
-        setMessage('');
-      }
-
-      const data = await res.json();
-
-      console.log(data);
-      console.log(data.message);
-
-      if (data.message === 'Success Send Message Email') {
-        setStatusMessage('Pesan berhasil dikirim');
-      }
-
-      if (data.errors.includes('email is required')) {
-        setStatusMessage('Masukin alamat email');
-      } else if (data.errors.includes('name is required')) {
-        setStatusMessage('Masukin nama anda');
-      } else if (data.errors.includes('subject is required')) {
-        setStatusMessage('Masukin subject');
-      } else if (data.errors.includes('message is required')) {
-        setStatusMessage('Masukin pesan anda');
-      }
-    } catch (error) {
-      console.log(error);
-      setMessage('Pesan gagal dikirim');
-    } finally {
-      setIsLoading(false);
+      console.log('Document written with ID: ', docRef.id);
+    } catch (e) {
+      console.error('Error adding document: ', e);
     }
   };
   return (
@@ -116,6 +85,7 @@ export default function Footer() {
               <label className='font-medium'>Pesan</label>
               <textarea
                 name='message'
+                placeholder='Tolong Cantumkan Data Berikut Ini : NIP/NUPTK, Dan Nomor Whatsapp Yang Dapat Di Hubungi Jika anda Lupas Password Dan Tidak Bisa Login. Jika Ada Masalah Lainnya Maka Cantumkan Nomor Whatsapp Saja Untuk Mempercepat Progress Reques Anda. ttd:adminCR'
                 className='focus:border-primaryo outline-primaryo max-row h-full w-full  resize-none rounded-lg border border-gray-300 bg-gray-50 p-2'
                 rows={4}
                 onChange={(e) => setMessage(e.target.value)}
