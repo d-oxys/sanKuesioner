@@ -89,7 +89,7 @@ export default function Footer() {
               <label className='font-medium'>Pesan</label>
               <textarea
                 name='message'
-                placeholder='Tolong Cantumkan Data Berikut Ini : NIP/NUPTK, Dan Nomor Whatsapp Yang Dapat Di Hubungi Jika anda Lupa Password Dan Tidak Bisa Login. Jika Ada Masalah Lainnya Maka Cantumkan Nomor Whatsapp Saja Untuk Mempercepat Progress Reques Anda. ttd:adminCR'
+                placeholder='Tolong Cantumkan Data Berikut Ini : NIP/NUPTK, Dan Nomor Whatsapp Yang Dapat Di Hubungi Jika Anda Lupa Password Dan Tidak Bisa Login. ttd:adminCR'
                 className='focus:border-primaryo outline-primaryo max-row h-full w-full  resize-none rounded-lg border border-gray-300 bg-gray-50 p-2'
                 rows={4}
                 onChange={(e) => setMessage(e.target.value)}
