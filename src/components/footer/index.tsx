@@ -47,6 +47,10 @@ export default function Footer() {
       });
 
       console.log('Document written with ID: ', docRef.id);
+
+      // Tutup dialog dan tampilkan pesan
+      handleClose();
+      alert('Pesan berhasil dikirim');
     } catch (e) {
       console.error('Error adding document: ', e);
     }
@@ -85,7 +89,7 @@ export default function Footer() {
               <label className='font-medium'>Pesan</label>
               <textarea
                 name='message'
-                placeholder='Tolong Cantumkan Data Berikut Ini : NIP/NUPTK, Dan Nomor Whatsapp Yang Dapat Di Hubungi Jika anda Lupas Password Dan Tidak Bisa Login. Jika Ada Masalah Lainnya Maka Cantumkan Nomor Whatsapp Saja Untuk Mempercepat Progress Reques Anda. ttd:adminCR'
+                placeholder='Tolong Cantumkan Data Berikut Ini : NIP/NUPTK, Dan Nomor Whatsapp Yang Dapat Di Hubungi Jika anda Lupa Password Dan Tidak Bisa Login. Jika Ada Masalah Lainnya Maka Cantumkan Nomor Whatsapp Saja Untuk Mempercepat Progress Reques Anda. ttd:adminCR'
                 className='focus:border-primaryo outline-primaryo max-row h-full w-full  resize-none rounded-lg border border-gray-300 bg-gray-50 p-2'
                 rows={4}
                 onChange={(e) => setMessage(e.target.value)}
