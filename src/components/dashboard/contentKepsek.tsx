@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DashboardLayout from './dashboardLayout';
 import { db } from '../../API/firebase';
 import { collection, getDocs, doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll } from 'firebase/storage';
 import DashboardCard from './dashboardCard';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -36,6 +36,17 @@ export default function ContentGuru() {
     getDocumentNames();
   }, []);
 
+  const deleteFolderContents = async (path: string) => {
+    const storage = getStorage();
+    const folderRef = ref(storage, path);
+
+    const files = await listAll(folderRef);
+
+    const deletionPromises = files.items.map((fileRef) => deleteObject(fileRef));
+
+    return Promise.all(deletionPromises);
+  };
+
   const handleDelete = async (npsnResponden: string) => {
     // Tampilkan konfirmasi sebelum menghapus
     if (!window.confirm('Apakah Anda yakin ingin menghapus dokumen ini?')) {
@@ -54,6 +65,10 @@ export default function ContentGuru() {
         const profilePictureRef = ref(storage, profilePicture);
         await deleteObject(profilePictureRef);
       }
+
+      // Hapus semua file di dalam folder
+      const folderPath = `users/${npsnResponden}`;
+      await deleteFolderContents(folderPath);
 
       // Hapus dokumen dari Firestore.
       await deleteDoc(userRef);

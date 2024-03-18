@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import ReactLoading from 'react-loading';
 import Link from 'next/link';
 import { collection, getDocs, doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll } from 'firebase/storage';
 import { db } from '../API/firebase';
 import DashboardLayout from './dashboard/dashboardLayout';
 import DashboardCard from './dashboard/dashboardCard';
@@ -27,6 +27,17 @@ export default function Dashboard() {
   const [documentNames, setDocumentNames] = useState<{ id: string; nama: string }[]>([]);
   const fileInputRef = useRef<HTMLInputElement[]>([]);
 
+  const deleteFolderContents = async (path: string) => {
+    const storage = getStorage();
+    const folderRef = ref(storage, path);
+
+    const files = await listAll(folderRef);
+
+    const deletionPromises = files.items.map((fileRef) => deleteObject(fileRef));
+
+    return Promise.all(deletionPromises);
+  };
+
   const handleDelete = async (npsnResponden: string) => {
     // Tampilkan konfirmasi sebelum menghapus
     if (!window.confirm('Apakah Anda yakin ingin menghapus dokumen ini?')) {
@@ -45,6 +56,10 @@ export default function Dashboard() {
         const profilePictureRef = ref(storage, profilePicture);
         await deleteObject(profilePictureRef);
       }
+
+      // Hapus semua file di dalam folder
+      const folderPath = `users/${npsnResponden}`;
+      await deleteFolderContents(folderPath);
 
       // Hapus dokumen dari Firestore.
       await deleteDoc(userRef);
