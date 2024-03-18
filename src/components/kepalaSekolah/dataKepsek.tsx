@@ -338,7 +338,7 @@ const DataKepsek: React.FC = () => {
                   <td className='text-blue-700'>{kuesionerData.nama}</td>
                 </tr>
                 <tr>
-                  <td className=''>NPSN</td>
+                  <td className=''>NIP</td>
                   <td className=' pl-8 pr-2 md:pl-28 md:pr-2'>:</td>
                   <td className='text-blue-700'>{kuesionerData.npsnResponden}</td>
                 </tr>
