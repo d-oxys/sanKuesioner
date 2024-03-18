@@ -8,6 +8,9 @@ import { Router, useRouter } from 'next/router';
 import Container from '../container';
 import FloatingButton from '../floatingButton';
 import ReactLoading from 'react-loading';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import pertanyaanDataTable from '../../API/guru.json';
 
 type PertanyaanData = {
   kategori: string;
@@ -33,6 +36,7 @@ type UserData = {
 };
 
 type KuesionerData = {
+  [key: string]: any; // Index signature
   asalSekolah: string;
   nama: string;
   npsnPeninjau: string;
@@ -58,12 +62,12 @@ const DataKepsek: React.FC = () => {
   const nipnuptk = Cookies.get('nipnuptk');
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   if (!nipnuptk) {
-  //     alert('Anda harus login terlebih dahulu');
-  //     router.push('/');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!nipnuptk) {
+      alert('Anda harus login terlebih dahulu');
+      router.push('/');
+    }
+  }, []);
 
   if (typeof documentNames === 'string') {
     documentNamesString = documentNames;
@@ -92,28 +96,60 @@ const DataKepsek: React.FC = () => {
     fetchData();
   }, [documentNamesString]);
 
-  const handlePDF = async () => {
-    setIsLoading(true);
-    // Tambahkan parameter ?view=true ke URL dan ganti nama file menjadi {documentNames}.pdf
-    const res = await fetch(`/api/pdf?url=${encodeURIComponent(window.location.href + '&view=true')}`);
-    const blob = await res.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${documentNames}.pdf`;
-    a.click();
-    setIsLoading(false);
+  // Kemudian, buat peta pertanyaan
+  const questionMap: { [key: string]: string } = {};
+  pertanyaanData.forEach((item: any, index: number) => {
+    Object.keys(item).forEach((key) => {
+      if (key.startsWith('pertanyaan')) {
+        questionMap[`${key}-${index + 1}`] = item[key];
+      }
+    });
+  });
+
+  // Definisikan fungsi generatePDF
+  const generatePDF = (kuesionerData: KuesionerData) => {
+    // Membuat dokumen PDF baru
+    const doc = new jsPDF();
+
+    // Menyiapkan data untuk tabel
+    const tableData = Object.keys(kuesionerData.jawaban)
+      .sort((a, b) => {
+        // Mengambil nomor pertanyaan dari kunci
+        const matchA = a.match(/\d+/);
+        const matchB = b.match(/\d+/);
+        const numA = matchA ? parseInt(matchA[0], 10) : 0;
+        const numB = matchB ? parseInt(matchB[0], 10) : 0;
+
+        // Mengurutkan berdasarkan nomor pertanyaan
+        return numA - numB;
+      })
+      .map((key, index) => {
+        // Memisahkan nomor dan teks pertanyaan
+        const questionText = questionMap[key] || key;
+        const questionNumber = questionText.split('.')[0];
+        const questionBody = questionText.split('.').slice(1).join('.');
+
+        return [
+          questionNumber, // Nomor pertanyaan
+          questionBody, // Teks pertanyaan
+          kuesionerData.jawaban[key], // Jawaban
+        ];
+      });
+
+    // @ts-ignore
+    doc.autoTable(undefined, {
+      head: [['No', 'Pertanyaan', 'Jawaban']],
+      body: tableData,
+    });
+
+    // Menghasilkan PDF dan memungkinkan pengguna untuk mendownloadnya
+    doc.save('kuesioner.pdf');
   };
 
   return (
     <>
       <Container>
         {!isViewMode && <FloatingButton />}
-        {!isViewMode && (
-          <button onClick={handlePDF} className='fixed left-4 top-4 cursor-pointer rounded bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600'>
-            Download PDF
-          </button>
-        )}
         {isLoading && (
           <div
             style={{
@@ -132,6 +168,7 @@ const DataKepsek: React.FC = () => {
             <ReactLoading type={'spin'} color={'#fff'} />
           </div>
         )}
+        <button onClick={() => kuesionerData && generatePDF(kuesionerData)}>Download PDF</button>
         <div className='my-5 overflow-auto rounded-sm bg-white md:w-[65%]'>
           <h1 className='py-4 text-center text-lg font-semibold md:text-2xl'>
             HASIL PENILAIAN KUESIONER <span className='block'>KINERJA GURU PENGGERAK</span>
